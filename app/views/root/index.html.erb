@@ -1,0 +1,16 @@
+<%= render partial: 'root/partials/shorten' %>
+
+<section id="popular">
+    <div class="container-fluid">
+        <div class="row text-center">
+            <h1>Popular links</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <%= render partial: 'root/partials/popular_links',
+                           locals: { :top_three_links => @top_three_links,
+                                     :next_two_links => @next_two_links } %>
+            </div>
+        </div>
+    </div>
+</section>
