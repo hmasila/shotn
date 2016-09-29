@@ -1,16 +1,35 @@
-<%= render partial: 'root/partials/shorten' %>
-
+<%= render partial: 'links/partials/shorten'%>
 <section id="popular">
     <div class="container-fluid">
         <div class="row text-center">
             <h1>Popular links</h1>
         </div>
         <div class="row">
-            <div class="col-md-6">
                 <%= render partial: 'root/partials/popular_links',
                            locals: { :top_three_links => @top_three_links,
                                      :next_two_links => @next_two_links } %>
             </div>
+        </div>
+</section>
+<section class="recent" id="recent">
+    <div class="row text-center" style="color:white ">
+        <h1>Recent links</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-lg-offset-2">
+          <%= render partial: 'root/partials/recent_links',
+                     collection: @recent_links, as: :recentlink %>
+        </div>
+    </div>
+</section>
+<section class="top-users" id="top-users">
+    <div class="container-fluid">
+        <div class="row text-center">
+            <h1>Influential Users</h1>
+        </div>
+        <div class="row">
+          <%= render partial: 'root/partials/top_users',
+                     collection: @top_user, as: :top_user %>
         </div>
     </div>
 </section>

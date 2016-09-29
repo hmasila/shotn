@@ -1,5 +1,6 @@
 class RootController < ApplicationController
   def index
+    @link = Link.new
     @top_links = Link.most_popular
     @first_three_links = @top_links[0..2]
     @next_two_links = @top_links[3..5]

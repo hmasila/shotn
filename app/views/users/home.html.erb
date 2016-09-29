@@ -1,7 +1,7 @@
-<%= render partial: 'application/shorten/shorten' %>
+<%= render partial: 'links/partials/shorten' %>
 <div class="section center home">
 	<div class="row container">
-		<%= render "users/partials/no_links" if @links.empty? %>
+		<%= render "users/partials/no_links" if @links.nil? %>
 		<ul>
 			<%= render partial: "users/partials/user_links", collection: @links, as: :link %>
 		</ul>

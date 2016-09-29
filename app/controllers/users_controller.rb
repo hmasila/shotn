@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_login, only: [:home]
-  before_action :new_link, only: [:home]
+  before_action :get_current_user, only: [:home]
 
   def new
     @user = User.new
@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
+    @user = User.new(user_params)
     if @user.save
       user_save_success
     else
@@ -16,11 +16,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def home
+    @links = @user.links
+  end
+
   private
 
   def user_save_success
-    login params[:user][:email], params[:user][:password]
-    flash[:success] = "Welcome, #{@user.name.capitalize}"
+    session[:user_id] = @user.id
+    flash[:success] = "Registration successful"
     redirect_to home_path
   end
 
@@ -29,13 +33,12 @@ class UsersController < ApplicationController
     redirect_to signup_path
   end
 
-  def home
-    @links = @user.get_links.decorate
-    render 'root/index'
-  end
-
   def user_params
     params.require(:user)
-          .permit :email, :password, :name
+          .permit(:email, :password, :name, :password_confirmation)
+  end
+
+  def get_current_user
+    @user = current_user
   end
 end

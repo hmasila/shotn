@@ -13,6 +13,7 @@ gem 'bootstrap-sass'
 gem 'font-awesome-sass', '~> 4.4.0'
 gem 'pismo'
 gem 'valid_url'
+gem 'bcrypt'
 
 group :development, :test do
   gem 'rspec-rails'

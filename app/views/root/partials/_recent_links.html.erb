@@ -1,0 +1,13 @@
+  <ul class="list-group">
+      <li class="list-group-item">
+          <p><%= recentlink.full_url%></p>
+          <div class="row">
+              <div class="col-md-6">
+                  <p><%= link_to "http://shotn/" + recentlink.vanity_string, recentlink.full_url, target: "_blank" %></p>
+              </div>
+              <div class="col-md-6 text-right">
+                  <span class="label label-as-badge label-primary"><%= recentlink.created_at %></span>
+              </div>
+          </div>
+      </li>
+  </ul>

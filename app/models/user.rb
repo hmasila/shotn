@@ -1,8 +1,10 @@
 class User < ApplicationRecord
   has_many :links
+
   before_save :encrypt_password
   after_save :clear_password
   attr_accessor :password
+
   VALID_EMAIL = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
   scope :top_users, lambda {
@@ -29,11 +31,18 @@ class User < ApplicationRecord
   def encrypt_password
     if password.present?
       self.salt = BCrypt::Engine.generate_salt
-      self.encrypted_password = BCrypt::Engine.hash_secret(password, salt)
+      self.password_digest = BCrypt::Engine.hash_secret(password, salt)
     end
   end
 
   def clear_password
     self.password = nil
+  end
+
+  def self.authenticate(email, password)
+    @user = User.where(email: email).first
+    if @user && @user.password_digest == BCrypt::Engine.hash_secret(password, @user.salt)
+      @user
+    end
   end
 end

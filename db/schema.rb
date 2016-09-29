@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927090229) do
+ActiveRecord::Schema.define(version: 20160929095653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,11 +29,12 @@ ActiveRecord::Schema.define(version: 20160927090229) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.string   "encrypted_password"
+    t.string   "password_digest"
     t.string   "email"
     t.string   "salt"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
   add_foreign_key "links", "users"
