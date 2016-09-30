@@ -2,20 +2,15 @@
     <div class="col-md-8 col-md-offset-2">
         <div class="shorten-container">
             <%= form_for (@link) do |f| %>
-            <div class="input-group">
-
-                <%= f.text_field :full_url, class: 'form-control original_url',
+            <%= f.text_field :full_url, class: 'panel panel-default form-control original_url',
                 required: true, placeholder: "Paste URL to shorten" %>
-                <span class="input-group-btn">
-                    <%= f.submit "Shorten ",
-		class: "btn btn-signup" %></span>
-            </div>
             <% if current_user %>
-            <div class="col-md-6 col-md-offset-3">
-                <p><%= f.text_field :vanity_string, placeholder: "Enter custom url",
-        class: 'panel panel-default custom_url' %></p>
-            </div>
+            <%= f.text_field :vanity_string, class: 'panel panel-default form-control custom_url',
+            placeholder: "Enter custom url" %>
             <% end %>
+            <div class="input-group-btn ">
+                <%= f.submit "Shorten ", class: "btn btn-shorten" %>
+            </div>
             <% end %>
         </div>
     </div>

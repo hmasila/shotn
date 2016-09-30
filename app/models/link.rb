@@ -14,10 +14,16 @@ class Link < ApplicationRecord
                          .limit(5).select('full_url',
                                           'vanity_string', 'created_at')
   }
-  validates :full_url, presence: true
+  validates :full_url, presence: true, uniqueness: true
   after_create :vanity_generate
 
   def vanity_generate
+    if vanity_string.nil? || vanity_string.eql?('')
+      generate_vanity_algorithm
+    end
+  end
+
+  def generate_vanity_algorithm
     id = self.id
     short_link = ''
     while id > 0 do
