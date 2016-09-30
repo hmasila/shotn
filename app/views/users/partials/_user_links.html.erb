@@ -1,0 +1,17 @@
+<ul class="list-group">
+    <li class="list-group-item">
+        <p><%= link.full_url%></p>
+        <div class="row">
+            <div class="col-md-6">
+                <p><%= link_to "http://shotn/" + link.vanity_string,
+                link.full_url, target: "_blank" %></p>
+            </div>
+            <div class="col-md-6 text-right">
+                <span class="label label-as-badge label-primary"><%= link.created_at %></span>
+            </div>
+        </div>
+
+    <%= link_to "Manage", edit_link_url(link)%>
+
+</li>
+</ul>

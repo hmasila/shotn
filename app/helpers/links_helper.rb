@@ -1,5 +1,5 @@
 module LinksHelper
-  def recent_links(time_created)
+  def strip_time
     Date.strptime(time_created.to_s, "%Y-%m-%d")
   end
 end

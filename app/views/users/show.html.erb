@@ -1,0 +1,12 @@
+<%= render partial: 'root/partials/intro' %>
+<section class "center home">
+	<div class="row container">
+		<div class="col-md-8">
+			<% if @links.nil? %>
+			<%= render partial: "users/partials/no_links" %>
+		<% else %>
+
+			<%= render partial: "users/partials/user_links", collection: @links, as: :link %>
+			<% end %></div>
+	</div>
+</section>

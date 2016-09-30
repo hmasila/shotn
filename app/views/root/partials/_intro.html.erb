@@ -1,0 +1,16 @@
+<header class="intro">
+    <div class="container" height="1000px">
+        <div class="row" style="margin-top:70px;">
+            <div class="text-center">
+                <h2 class="welcome">Welcome to shotn</h2>
+                <h4 class="simplify-text">Simplify your links!!</h4>
+            </div>
+        </div>
+        <%= render partial: 'links/partials/shorten'%>
+        <div class="row text-center shortened-url">
+            <h4>
+                <%= link_to flash[:vanity_string], flash[:vanity_string], target: "_blank" %>
+            </h4>
+    </div>
+</div>
+</header>

@@ -28,8 +28,4 @@ class Link < ApplicationRecord
       (CODE_LENGTH - short_link.length) + short_link
     save
   end
-
-  def self.unique_vanity_string(vanity_string)
-    Link.find_by(vanity_string: vanity_string)
-  end
 end

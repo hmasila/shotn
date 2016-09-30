@@ -1,19 +1,59 @@
 class LinksController < ApplicationController
-  before_action :login_required, only: [:edit, :update, :destroy]
-  before_action :set_link, only: [:edit, :update, :destroy]
+  before_action :require_login, only: [:edit, :update, :destroy]
+  before_action :set_link, only: [:edit, :show, :update, :destroy]
+
+  include ConstantsHelper
 
   def create
     @link = Link.new(link_params)
-    return unless short_url_unique(@link.vanity_string)
-    return if reserved_word?
-
+    return unless unique_vanity_string
     if @link.save
-      url_save_success
+      successful_link_creation
     else
-      url_save_failure
+      flash[:error] = UNSUCCESSFUL_LINK
+    end
+  end
+
+  def show
+    if redirect_to @link.original_url
+      @link.clicks += 1
+      @link.save
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    return unless unique_vanity_string
+    if @link.update(link_params)
+      flash[:success] = LINK_UPDATED
+    else
+      flash[:error] = LINK_NOT_UPDATED
+    end
+  end
+
+  def unique_vanity_string
+    Link.find_by(vanity_string: params[:vanity_string])
+  end
+
+  def successful_link_creation
+    if logged_in?
+      flash[:success] = SUCCESSFUL_LINK
+      redirect_to home_path
+    else
+      redirect_to '/'
     end
   end
 
   private
+
+  def set_link
+    @link = Link.find(params[:id])
+  end
+
+  def link_params
+    params.require(:link).permit(:full_url, :vanity_string, :active)
+  end
 
 end
