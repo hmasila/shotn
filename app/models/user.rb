@@ -8,7 +8,7 @@ class User < ApplicationRecord
   VALID_EMAIL = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
   scope :top_users, lambda {
-    order('links.count desc').limit(5).select('name', 'links.count')
+    joins(:links).order('links.count desc').limit(5).select('name', 'links.count')
   }
 
   validates :name, length: {
