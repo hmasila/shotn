@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
   def new
     render layout: 'auth'
-    redirect_to home_path && return if current_user
     @user = User.new
   end
 
