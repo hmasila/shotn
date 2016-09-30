@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_login, only: [:home]
-  before_action :get_current_user, only: [:home]
+  before_action :get_current_user, only: [:show]
 
   def new
     @user = User.new
@@ -12,11 +12,13 @@ class UsersController < ApplicationController
     if @user.save
       user_save_success
     else
-      user_save_failure
+      flash[:error] = SIGNUP_FAILURE
+      redirect_to signup_path
     end
   end
 
-  def home
+  def show
+    @link = Link.new
     @links = @user.links
   end
 
@@ -24,13 +26,8 @@ class UsersController < ApplicationController
 
   def user_save_success
     session[:user_id] = @user.id
-    flash[:success] = "Registration successful"
+    flash[:success] = SIGNUP_SUCCESS
     redirect_to home_path
-  end
-
-  def user_save_failure
-    flash[:error] = "Registration failed"
-    redirect_to signup_path
   end
 
   def user_params

@@ -3,10 +3,12 @@
 	<div class="row container">
 		<div class="col-md-8">
 			<% if @links.nil? %>
+			<p> ghjj </p>
 			<%= render partial: "users/partials/no_links" %>
 		<% else %>
 
 			<%= render partial: "users/partials/user_links", collection: @links, as: :link %>
-			<% end %></div>
+			<% end %>
+		</div>
 	</div>
 </section>
