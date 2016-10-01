@@ -1,8 +1,7 @@
 class LinksController < ApplicationController
   before_action :require_login, only: [:edit, :update, :destroy]
   before_action :set_link, only: [:edit, :show, :update,
-                                  :destroy, :original_url,
-                                  :deleted, :inactive]
+                                  :destroy, :original_url, :error]
 
   include ConstantsHelper
 
@@ -26,11 +25,7 @@ class LinksController < ApplicationController
   def edit
   end
 
-  def deleted
-    render layout: 'plain_layout'
-  end
-
-  def inactive
+  def error
     render layout: 'plain_layout'
   end
 
@@ -60,14 +55,14 @@ class LinksController < ApplicationController
   end
 
   def original_url
-    if @link.active
+    if @link.active && !@link.deleted
       if redirect_to @link.full_url
         @link.clicks += 1
         @link.save
       end
     else
       flash[:error] = INACTIVE_LINK
-      redirect_to inactive_path
+      redirect_to error_path
     end
   end
 
