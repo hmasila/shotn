@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    render layout: 'auth'
+    render layout: 'plain_layout'
     redirect_to home_path if current_user
     @user = User.new
   end
@@ -9,15 +9,15 @@ class SessionsController < ApplicationController
     @user = User.authenticate(params[:email], params[:password])
     if @user
       session[:user_id] = @user.id
-      redirect_to '/home', notice: "Login successful"
+      redirect_to home_path, notice: "Login successful"
     else
       flash[:error] = "Loggin failed!"
-      redirect_to '/login', notice: "Loggin failed!"
+      redirect_to login_path, notice: "Loggin failed!"
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to '/login'
+    redirect_to login_path
   end
 end
