@@ -15,9 +15,14 @@ class LinksController < ApplicationController
   end
 
   def show
-    if redirect_to @link.original_url
-      @link.clicks += 1
-      @link.save
+    if @link.active
+      if redirect_to @link.full_url
+        @link.clicks += 1
+        @link.save
+      end
+    else
+      flash[:error] = INACTIVE_LINK
+      redirect_to home_path
     end
   end
 
@@ -25,10 +30,11 @@ class LinksController < ApplicationController
   end
 
   def update
-    return unless unique_vanity_string
     if @link.update(link_params)
+      redirect_to home_path
       flash[:success] = LINK_UPDATED
     else
+      redirect_to home_path
       flash[:error] = LINK_NOT_UPDATED
     end
   end
@@ -40,6 +46,11 @@ class LinksController < ApplicationController
     else
       redirect_to '/'
     end
+  end
+
+  def destroy
+    @link.destroy
+    redirect_to home_path
   end
 
   private

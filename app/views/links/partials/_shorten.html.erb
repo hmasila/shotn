@@ -1,17 +1,16 @@
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <div class="shorten-container">
-            <%= form_for :link, url: '/links', method: :post do |f| %>
+            <%= form_for :link, url: links_path, method: :post do |f| %>
             <%= f.text_field :full_url, class: 'panel panel-default form-control original_url',
                 required: true, placeholder: "Paste URL to shorten" %>
             <% if current_user %>
             <%= f.text_field :vanity_string, class: 'panel panel-default form-control custom_url',
             placeholder: "Enter custom url" %>
             <% end %>
-            <div class="input-group-btn ">
-                <%= f.submit "Shorten ", class: "btn btn-shorten" %>
-            </div>
+            <%= f.submit "Shorten ", class: "btn btn-shorten" %>
             <% end %>
-        </div></div>
+        </div>
     </div>
+</div>
 </div>

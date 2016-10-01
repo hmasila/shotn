@@ -5,13 +5,13 @@ class Link < ApplicationRecord
 
   scope :most_popular, lambda {
     where(deleted: false).order('clicks desc')
-                         .limit(5).select('full_url',
+                         .limit(5).select('id', 'full_url',
                                           'vanity_string', 'clicks')
   }
 
   scope :most_recent, lambda {
     where(deleted: false).order('created_at desc')
-                         .limit(5).select('full_url',
+                         .limit(5).select('id', 'full_url',
                                           'vanity_string', 'created_at')
   }
   validates :full_url, presence: true
