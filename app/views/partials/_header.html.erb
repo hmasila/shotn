@@ -14,7 +14,7 @@
             <ul class="nav navbar-nav navbar-right">
               <% if logged_in? %>
               <li class="current_user center">
-                  <%= link_to current_user.name %>
+                  <%= link_to current_user.name, home_path %>
               </li>
               <li>
                   <%= link_to "Logout", logout_path %>
