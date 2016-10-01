@@ -3,11 +3,12 @@
           <p><%= recentlink.full_url%></p>
           <div class="row">
               <div class="col-md-6">
-                  <p><%= link_to "http://shotn/" + recentlink.vanity_string,
-                  recentlink.full_url, target: "_blank" %></p>
+                <p><%= link_to "http://shotn/" + recentlink.vanity_string,
+                link_path(recentlink), target: "_blank" %></p>
               </div>
               <div class="col-md-6 text-right">
-                  <span class="label label-as-badge label-primary"><%= recentlink.created_at %></span>
+                    <span class="label label-as-badge label-primary">
+                    <%= distance_of_time_in_words(recentlink.created_at, Time.now)%> ago</span>
               </div>
           </div>
       </li>

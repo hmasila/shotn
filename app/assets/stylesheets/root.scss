@@ -86,7 +86,7 @@ a:focus {
     margin-bottom: 50px;
   }
 
-.btn-copy, .btn-shorten {
+.btn-shorten {
   background: orange;
   width: 100px;
   font-family: 'Lato';
@@ -95,9 +95,8 @@ a:focus {
   height: 50px;
   font-size: 18px;
 }
-.btn-copy {
-  margin-top:20px;
-  height: 35px;
+.btn-manage {
+  margin:10px;
 }
 .original_url {
   height: 50px;
@@ -150,4 +149,7 @@ a:focus {
   margin-top: 50px;
   padding: 50px;
   font-family: 'Lato';
+}
+.edit_link_container {
+  margin: 100px;
 }

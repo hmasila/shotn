@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-6">
                 <p><%= link_to "http://shotn/" + link.vanity_string,
-                link.full_url, target: "_blank" %></p>
+                link_path(link), target: "_blank" %></p>
             </div>
             <div class="col-md-6 text-right">
                 <span class="label label-as-badge label-primary"><%= distance_of_time_in_words(link.created_at, Time.now)%> ago</span>
