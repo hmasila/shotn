@@ -12,4 +12,5 @@ Rails.application.routes.draw do
 
   resources :links
   get '/original_url/:id' => 'links#original_url', as: :original_url
+  get '/inactive/:id' => 'links#inactive', as: :inactive
 end
