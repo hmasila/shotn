@@ -7,13 +7,10 @@ class LinksController < ApplicationController
   def create
     @link = Link.new(link_params)
     set_user_id
-    binding.pry
-    return unless unique_vanity_string
     if @link.save
       successful_link_creation
     else
       flash[:error] = UNSUCCESSFUL_LINK
-      redirect_to '/'
     end
   end
 
@@ -36,14 +33,12 @@ class LinksController < ApplicationController
     end
   end
 
-  def unique_vanity_string
-    Link.find_by(vanity_string: params[:vanity_string])
-  end
-
   def successful_link_creation
     if logged_in?
       flash[:success] = SUCCESSFUL_LINK
       redirect_to home_path
+    else
+      redirect_to '/'
     end
   end
 
@@ -58,7 +53,9 @@ class LinksController < ApplicationController
   end
 
   def set_user_id
-    @link.user_id = current_user.id
+    if logged_in?
+      @link.user_id = current_user.id
+    end
   end
 
 end

@@ -14,7 +14,8 @@ class Link < ApplicationRecord
                          .limit(5).select('full_url',
                                           'vanity_string', 'created_at')
   }
-  validates :full_url, presence: true, uniqueness: true
+  validates :full_url, presence: true
+  validates :vanity_string, uniqueness: true
   after_create :vanity_generate
 
   def vanity_generate
