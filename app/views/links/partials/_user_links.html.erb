@@ -1,0 +1,15 @@
+<ul class="list-group">
+    <li class="list-group-item">
+        <p><%= link.full_url%></p>
+        <div class="row">
+            <div class="col-md-6">
+                <p><%= link_to "http://shotn/" + link.vanity_string,
+                original_url_path(link), target: "_blank" %></p>
+            </div>
+            <div class="wrapper">
+                <%= link_to "Manage", edit_link_path(link), class: "details-manage" %>
+                <%= link_to "Details", link_path(link), class: "details-manage" %>
+            </div>
+        </div>
+    </li>
+</ul>

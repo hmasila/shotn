@@ -130,11 +130,15 @@ a:focus {
 }
 .footer-details{
     padding: 20px;
+    background-color:rgba(0, 0, 0, 0.9);
 }
 .footer-icons{
   margin-bottom: 20px;
   margin-top: 20px;
   color: orange;
+}
+.copyright{
+  background-color:rgba(0, 0, 0, 0.85);
 }
 .social-icons{
   padding-left: 10px;
@@ -152,4 +156,16 @@ a:focus {
 }
 .edit_link_container {
   margin: 100px;
+}
+.details-manage {
+    margin:10px;
+    font-family: 'Lato';
+    font-size: 18px;
+    display: inline-block;
+}
+.details {
+  color: #1862B9;
+}
+.text-right{
+  float: right;
 }

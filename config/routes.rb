@@ -4,12 +4,12 @@ Rails.application.routes.draw do
   resources :users
   get '/signup' => 'users#new', as: :signup
   post '/signup' => 'users#create'
-  get '/home' => 'users#show', as: :home
+  get '/home' => 'links#index', as: :home
   resources :sessions
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy', as: :logout
 
   resources :links
- get "/:vanity_string" => "links#create_vanity_string"
+  get '/original_url/:id' => 'links#original_url', as: :original_url
 end

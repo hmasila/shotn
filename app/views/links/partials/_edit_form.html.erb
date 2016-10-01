@@ -1,5 +1,8 @@
 <%= form_for :link, url: link_path(@link), method: :put do |f| %>
-<%= @link.full_url %>
+<div class="field">
+    <%= f.label :full_url %>
+    <%= f.text_field :full_url, class: 'form-control', required: true %>
+</div>
 <div class="field">
     <%= f.label :vanity_string %>
     <%= f.text_field :vanity_string, class: 'form-control', required: true %>
@@ -17,5 +20,5 @@
         <%= link_to "Delete ", link_path(@link), class: "btn btn-danger", method: :delete %>
     </div>
 </div>
-<%= link_to 'Back', home_path %>
+<h4><%= link_to 'Back', home_path, class: "fa fa-long-arrow-left" %></h4>
 <% end %>
