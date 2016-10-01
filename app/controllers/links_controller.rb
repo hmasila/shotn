@@ -1,8 +1,13 @@
 class LinksController < ApplicationController
   before_action :require_login, only: [:edit, :update, :destroy]
-  before_action :set_link, only: [:edit, :show, :update, :destroy]
+  before_action :set_link, only: [:edit, :show, :update,
+                                  :destroy, :original_url]
 
   include ConstantsHelper
+
+  def index
+    @links = current_user.links
+  end
 
   def create
     @link = Link.new(link_params)
@@ -15,15 +20,6 @@ class LinksController < ApplicationController
   end
 
   def show
-    if @link.active
-      if redirect_to @link.full_url
-        @link.clicks += 1
-        @link.save
-      end
-    else
-      flash[:error] = INACTIVE_LINK
-      redirect_to home_path
-    end
   end
 
   def edit
@@ -39,6 +35,12 @@ class LinksController < ApplicationController
     end
   end
 
+  def destroy
+    @link.update(deleted: true)
+    flash[:success] = DELETE_SUCCESS
+    redirect_to home_path
+  end
+
   def successful_link_creation
     if logged_in?
       flash[:success] = SUCCESSFUL_LINK
@@ -48,9 +50,16 @@ class LinksController < ApplicationController
     end
   end
 
-  def destroy
-    @link.destroy
-    redirect_to home_path
+  def original_url
+    if @link.active
+      if redirect_to @link.full_url
+        @link.clicks += 1
+        @link.save
+      end
+    else
+      flash[:error] = INACTIVE_LINK
+      redirect_to home_path
+    end
   end
 
   private

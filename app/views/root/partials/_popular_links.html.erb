@@ -4,7 +4,7 @@
         <div class="panel-body">
             <p><%= toplink.full_url %></p>
             <p><%= link_to "http://shotn/" + toplink.vanity_string,
-            link_path(toplink), target: "_blank" %></p>
+            original_url_path(toplink), target: "_blank" %></p>
             <span class="label label-as-badge label-primary"><%= toplink.clicks%>
                 clicks</span>
         </div>
@@ -19,7 +19,7 @@
         <div class="panel-body">
             <p><%= toplink.full_url %></p>
             <p><%= link_to "http://shotn/" + toplink.vanity_string,
-            link_path(toplink), target: "_blank" %></p>
+            original_url_path(toplink), target: "_blank" %></p>
             <span class="label label-as-badge label-primary"><%= toplink.clicks%>
                 clicks</span>
         </div>
