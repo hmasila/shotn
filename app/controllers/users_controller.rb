@@ -22,7 +22,6 @@ class UsersController < ApplicationController
   def show
     @link = Link.new
     @links = @user.links
-    #binding.pry
   end
 
   private
