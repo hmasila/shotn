@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :user do
-    name "MyString"
-    encrypted_password "MyString"
-    email "MyString"
+    name "MasLah"
+    password "Maslah"
+    email "MAsLah.kiBe@ANDEla.COM"
     salt "MyString"
   end
 end

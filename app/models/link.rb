@@ -19,15 +19,13 @@ class Link < ApplicationRecord
   after_create :vanity_generate
 
   def vanity_generate
-    if vanity_string.nil? || vanity_string.eql?('')
-      generate_vanity_algorithm
-    end
+    generate_vanity_algorithm if vanity_string.nil? || vanity_string.eql?('')
   end
 
   def generate_vanity_algorithm
     id = self.id
     short_link = ''
-    while id > 0 do
+    while id > 0
       short_link = CHARSET[id % BASE].chr + short_link
       id /= BASE
     end
