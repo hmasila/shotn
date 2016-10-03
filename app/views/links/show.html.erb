@@ -1,0 +1,25 @@
+	<div class="row">
+		<div class="container-fluid edit_link_container">
+			<div class="col-md-6 col-md-offset-3">
+				<ul class="list-group details-manage">
+					<li class="list-group-item">
+						Original URL
+				<p class="details"><%= @link.full_url %></p>
+				<li class="list-group-item">
+					Shortened URL
+					<span class="details text-right"><%= @link.vanity_string %></span>
+				</li>
+				<li class="list-group-item">
+					Active
+				<span class="details text-right"><%= @link.active %></span>
+				<li class="list-group-item">
+					Deleted
+				<span class="details text-right"><%= @link.deleted %></span>
+				<li class="list-group-item">
+					Clicks
+				<span class="details text-right"><%= @link.clicks %></span>
+			</ul>
+			<h4><%= link_to 'Back', home_path, class: "fa fa-long-arrow-left" %></h4>
+			</div>
+		</div>
+	</div>

@@ -1,0 +1,15 @@
+  <ul class="list-group">
+      <li class="list-group-item">
+          <p><%= recentlink.full_url%></p>
+          <div class="row">
+              <div class="col-md-6">
+                <p><%= link_to "http://shotn/" + recentlink.vanity_string,
+                original_url_path(recentlink), target: "_blank" %></p>
+              </div>
+              <div class="col-md-6 text-right">
+                    <span class="label label-as-badge label-primary">
+                    <%= distance_of_time_in_words(recentlink.created_at, Time.now)%> ago</span>
+              </div>
+          </div>
+      </li>
+  </ul>
