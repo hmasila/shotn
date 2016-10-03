@@ -21,6 +21,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'pry-rails'
+  gem 'rails-controller-testing'
 end
 
 group :development do
