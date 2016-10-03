@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :require_login, only: [:home]
-  before_action :get_current_user, only: [:show]
 
   include ConstantsHelper
 
@@ -19,11 +18,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-    @link = Link.new
-    @links = @user.links
-  end
-
   private
 
   def user_save_success
@@ -35,9 +29,5 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user)
           .permit(:email, :password, :name, :password_confirmation)
-  end
-
-  def get_current_user
-    @user = current_user
   end
 end
