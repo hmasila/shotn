@@ -81,26 +81,31 @@ a:focus {
   font-family: 'Lato';
   font-size: 20px;
 }
+
 .shorten-container {
     margin-top: 28px;
     margin-bottom: 50px;
-  }
+}
 
 .btn-shorten {
   background: orange;
   width: 100px;
   font-family: 'Lato';
 }
+
 .btn-shorten{
   height: 50px;
   font-size: 18px;
 }
+
 .btn-manage {
   margin:10px;
 }
+
 .original_url {
   height: 50px;
 }
+
 .shortened-url{
   text-decoration: none;
   font-size: 24px;
@@ -111,35 +116,44 @@ a:focus {
   padding-top:40px;
   padding-bottom: 20px;
 }
+
 #popular{
   background-color: #EBEFF2;
 }
+
 #recent{
   background-color: #2D384A;
 }
+
 #top-users{
   background-color: #FFF;
 }
+
 .label-as-badge {
     border-radius: 1em;
 }
+
 .footer{
     color: white;
     font-family: 'Lato';
     font-size: 18px;
 }
+
 .footer-details{
     padding: 20px;
     background-color:rgba(0, 0, 0, 0.9);
 }
+
 .footer-icons{
   margin-bottom: 20px;
   margin-top: 20px;
   color: orange;
 }
+
 .copyright{
   background-color:rgba(0, 0, 0, 0.85);
 }
+
 .social-icons{
   padding-left: 10px;
 }
@@ -149,23 +163,28 @@ a:focus {
   height: 50px;
   width: 100%;
 }
+
 .no-links {
   margin-top: 50px;
   padding: 50px;
   font-family: 'Lato';
 }
+
 .edit_link_container {
   margin: 100px;
 }
+
 .details-manage {
     margin:10px;
     font-family: 'Lato';
     font-size: 18px;
     display: inline-block;
 }
+
 .details {
   color: #1862B9;
 }
+
 .text-right{
   float: right;
 }

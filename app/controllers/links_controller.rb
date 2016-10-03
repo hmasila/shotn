@@ -45,15 +45,6 @@ class LinksController < ApplicationController
     redirect_to home_path
   end
 
-  def successful_link_creation
-    if logged_in?
-      flash[:success] = SUCCESSFUL_LINK
-      redirect_to home_path
-    else
-      redirect_to '/'
-    end
-  end
-
   def original_url
     if @link.active && !@link.deleted
       if redirect_to @link.full_url
@@ -77,9 +68,15 @@ class LinksController < ApplicationController
   end
 
   def set_user_id
-    if logged_in?
-      @link.user_id = current_user.id
-    end
+    @link.user_id = current_user.id if logged_in?
   end
 
+  def successful_link_creation
+    if logged_in?
+      flash[:success] = SUCCESSFUL_LINK
+      redirect_to home_path
+    else
+      redirect_to '/'
+    end
+  end
 end
