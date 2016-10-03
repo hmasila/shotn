@@ -15,16 +15,19 @@ RSpec.describe UsersController, type: :controller do
           user: FactoryGirl.attributes_for(:user, id: 1)
         }
       end
+
       it 'creates a new User' do
         expect do
           user_valid_request
         end.to change(User, :count).by(1)
       end
+
       it 'redirects to home_path' do
         user_valid_request
         expect(response).to redirect_to home_path
       end
     end
+
     context 'with invalid attributes' do
       let(:user_invalid_request) do
         post :create, params: {
@@ -37,6 +40,7 @@ RSpec.describe UsersController, type: :controller do
           user_invalid_request
         end.to change(User, :count).by(0)
       end
+
       it 'redirects to signup_path' do
         user_invalid_request
         expect(response).to redirect_to signup_path
