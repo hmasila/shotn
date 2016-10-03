@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   include ConstantsHelper
 
   def new

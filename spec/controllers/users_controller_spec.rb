@@ -2,9 +2,17 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
   describe 'GET #new' do
+    before(:each) {  get :new }
     it 'returns http success' do
-      get :new
       expect(response).to have_http_status(:success)
+    end
+
+    it 'renders new template' do
+      expect(response).to render_template(:new)
+    end
+
+    it 'uses plain_layout' do
+      expect(response).to render_template('layouts/plain_layout')
     end
   end
 
@@ -31,7 +39,8 @@ RSpec.describe UsersController, type: :controller do
     context 'with invalid attributes' do
       let(:user_invalid_request) do
         post :create, params: {
-          user: FactoryGirl.attributes_for(:user, name: nil)
+          user: FactoryGirl.attributes_for(:user, name: nil,
+                                                  email: nil, password: nil)
         }
       end
 
