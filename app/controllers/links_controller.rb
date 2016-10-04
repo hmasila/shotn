@@ -1,7 +1,8 @@
 class LinksController < ApplicationController
   before_action :require_login, only: [:edit, :update, :destroy]
   before_action :set_link, only: [:edit, :show, :update,
-                                  :destroy, :original_url, :error]
+                                  :destroy]
+  before_action :find_by_vanity_string, only: [:original_url_path, :error]
 
   include ConstantsHelper
 
@@ -46,11 +47,9 @@ class LinksController < ApplicationController
   end
 
   def original_url
+    find_by_vanity_string
     if @link.active && !@link.deleted
-      if redirect_to @link.full_url
-        @link.clicks += 1
-        @link.save
-      end
+      redirect_to_original
     else
       flash[:error] = INACTIVE_LINK
       redirect_to error_path
@@ -58,6 +57,16 @@ class LinksController < ApplicationController
   end
 
   private
+
+  def redirect_to_original
+    return unless redirect_to @link.full_url
+    @link.clicks += 1
+    @link.save
+  end
+
+  def find_by_vanity_string
+    @link = Link.find_by(vanity_string: params[:vanity_string])
+  end
 
   def set_link
     @link = Link.find(params[:id])
