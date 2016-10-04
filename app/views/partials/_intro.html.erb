@@ -1,16 +1,21 @@
 <header class="intro">
     <div class="container" height="1000px">
         <div class="row" style="margin-top:70px;">
+          <div class="flash">
+          <%flash.each do |msg_type, msg|%>
+            <div class="alert alert-<%= msg_type %> alert-dismissible fade in" id="flash" role="alert">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <%= msg %>
+              <% end %>
+            </div>
+          </div>
             <div class="text-center">
                 <h2 class="welcome">Welcome to shotn</h2>
                 <h4 class="simplify-text">Simplify your links!!</h4>
             </div>
         </div>
         <%= render partial: 'links/partials/shorten'%>
-        <div class="row text-center shortened-url">
-            <h4>
-                <%= link_to flash[:vanity_string], flash[:vanity_string], target: "_blank" %>
-            </h4>
-        </div>
     </div>
 </header>

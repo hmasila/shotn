@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       flash[:success] = LOGIN_SUCCESS
       redirect_to home_path
     else
-      flash[:error] = LOGIN_FAILED
+      flash[:danger] = LOGIN_FAILED
       redirect_to login_path
     end
   end

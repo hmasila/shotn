@@ -5,12 +5,16 @@
             <%= f.text_field :full_url, class: 'panel panel-default form-control original_url',
                 required: true, placeholder: "Paste URL to shorten" %>
             <% if current_user %>
-            <%= f.text_field :vanity_string, class: 'panel panel-default form-control custom_url',
+            <%= f.text_field :vanity_string, class: 'panel panel-default form-control custom-url',
             placeholder: "Enter custom url" %>
             <% end %>
             <%= f.submit "Shorten ", class: "btn btn-shorten" %>
+            <div class="row text-center shortened-url">
+                <h4>
+                    <%=:vanity_string%>
+                </h4>
+            </div>
             <% end %>
         </div>
     </div>
-</div>
 </div>

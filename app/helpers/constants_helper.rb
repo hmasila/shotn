@@ -1,22 +1,18 @@
 module ConstantsHelper
-  CHARSET = "klmnopKST12UVWXYqrstuvwxyzA03B456LMdefN89OPQR7abcghijCDEFGHIJZ"
+  CHARSET = 'klmnopKST12UVWXYqrstuvwxyzA03B456LMde'\
+            'fN89OPQR7abcghijCDEFGHIJZ'.freeze
   BASE = 62
   CODE_LENGTH = 4
-  SUCCESSFUL_LINK = "Link generated successfully."
-  UNSUCCESSFUL_LINK = "An error occured when generating the short link"
-  USED_VANITY_STRING = "URL already taken. Please choose a "\
-        "different one, or leave blank to generate unique link."
-  PERMISSION_DENIED = "You must be logged in to perform this function."
-  LINK_UPDATED = "Link updated successfully"
-  LINK_NOT_UPDATED = "An error occured when updating the short link"
-  LOGIN_SUCCESS = "Successfully logged in."
-  LOGIN_FAILED = "Login failed. Email or password is incorrect!"
-  LOGOUT_SUCCESS = "Successfully logged out"
-  ERROR = "Error occurred!"
-  LINK_DELETED = "This link has been deleted"
-  INACTIVE_LINK = "This link has been disabled"
-  DELETE_SUCCESS = "Link deleted successfully!"
-  SIGNUP_FAILURE = "Registration failed"
-  SIGNUP_SUCCESS = "Registration successful"
-
+  SUCCESSFUL_LINK = 'Link generated successfully.'.freeze
+  UNSUCCESSFUL_LINK = 'An error occured when generating the short link'.freeze
+  LINK_UPDATED = 'Link updated successfully'.freeze
+  LINK_NOT_UPDATED = 'An error occured when updating the short link'.freeze
+  LOGIN_SUCCESS = 'Successfully logged in.'.freeze
+  LOGIN_FAILED = 'Login failed. Email or password is incorrect!'.freeze
+  LOGOUT_SUCCESS = 'Successfully logged out'.freeze
+  ERROR = 'Error occurred!'.freeze
+  DELETE_SUCCESS = 'Link deleted successfully!'.freeze
+  SIGNUP_FAILURE = 'Registration failed'.freeze
+  SIGNUP_SUCCESS = 'Registration successful'.freeze
+  LOGIN_REQUIRED = 'You must be logged in to access this section'.freeze
 end

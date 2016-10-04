@@ -1,5 +1,5 @@
 class LinksController < ApplicationController
-  before_action :require_login, only: [:edit, :update, :destroy]
+  before_action :require_login, only: [:edit, :update, :destroy, :index]
   before_action :set_link, only: [:edit, :show, :update,
                                   :destroy]
   before_action :find_by_vanity_string, only: [:original_url_path, :error]
@@ -16,7 +16,8 @@ class LinksController < ApplicationController
     if @link.save
       successful_link_creation
     else
-      flash[:error] = UNSUCCESSFUL_LINK
+      flash[:danger] = UNSUCCESSFUL_LINK
+      redirect_to root_url
     end
   end
 
@@ -32,11 +33,10 @@ class LinksController < ApplicationController
 
   def update
     if @link.update(link_params)
-      redirect_to home_path
-      flash[:success] = LINK_UPDATED
+      redirect_to home_path, flash[:success] = LINK_UPDATED
     else
+      flash[:danger] = LINK_NOT_UPDATED
       redirect_to home_path
-      flash[:error] = LINK_NOT_UPDATED
     end
   end
 
@@ -51,7 +51,7 @@ class LinksController < ApplicationController
     if @link.active && !@link.deleted
       redirect_to_original
     else
-      flash[:error] = INACTIVE_LINK
+      flash[:danger] = INACTIVE_LINK
       redirect_to error_path
     end
   end
@@ -85,7 +85,8 @@ class LinksController < ApplicationController
       flash[:success] = SUCCESSFUL_LINK
       redirect_to home_path
     else
-      redirect_to '/'
+      flash[:success] = SUCCESSFUL_LINK
+      redirect_to root_url
     end
   end
 end
