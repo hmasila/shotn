@@ -1,5 +1,6 @@
   <ul class="list-group">
       <li class="list-group-item">
+        <% if recentlink %>
           <p><%= recentlink.full_url%></p>
           <div class="row">
               <div class="col-md-6">
@@ -11,5 +12,7 @@
                     <%= distance_of_time_in_words(recentlink.created_at, Time.now)%> ago</span>
               </div>
           </div>
+          <% else %>
+          <%= render partial: "root/partials/_no_links" %>
       </li>
   </ul>
