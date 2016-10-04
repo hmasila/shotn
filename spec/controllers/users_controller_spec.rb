@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
   describe 'GET #new' do
-    before(:each) {  get :new }
-    it 'returns http success' do
-      expect(response).to have_http_status(:success)
+    before(:each) { get :new }
+    it 'returns a status code of 200' do
+      expect(response.status).to eq 200
     end
 
     it 'renders new template' do
@@ -30,6 +30,10 @@ RSpec.describe UsersController, type: :controller do
         end.to change(User, :count).by(1)
       end
 
+      it 'returns a status code of 200' do
+        expect(response.status).to eq 200
+      end
+
       it 'redirects to home_path' do
         user_valid_request
         expect(response).to redirect_to home_path
@@ -49,6 +53,11 @@ RSpec.describe UsersController, type: :controller do
           user_invalid_request
         end.to change(User, :count).by(0)
       end
+
+      it 'returns a status code of 200' do
+        expect(response.status).to eq 200
+      end
+
 
       it 'redirects to signup_path' do
         user_invalid_request
