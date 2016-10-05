@@ -3,11 +3,13 @@
         <div class="row" style="margin-top:70px;">
           <div class="flash">
           <%flash.each do |msg_type, msg|%>
+          <% unless msg_type == "notice" %>
             <div class="alert alert-<%= msg_type %> alert-dismissible fade in" id="flash" role="alert">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
               <%= msg %>
+              <% end %>
               <% end %>
             </div>
           </div>
@@ -17,5 +19,10 @@
             </div>
         </div>
         <%= render partial: 'links/partials/shorten'%>
+        <div class="row text-center shortened-url">
+            <h4>
+              <%= flash[:notice]%>
+            </h4>
+        </div>
     </div>
 </header>

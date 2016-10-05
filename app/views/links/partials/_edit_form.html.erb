@@ -15,7 +15,6 @@
             <%= f.radio_button :active,  false, id: "false" %>
             <%= f.label :active, "Inactive", for: "false" %>
         </div>
-
         <%= f.submit "Update ", class: "btn btn-warning" %>
         <%= link_to "Delete ", link_path(@link), class: "btn btn-danger", method: :delete %>
     </div>

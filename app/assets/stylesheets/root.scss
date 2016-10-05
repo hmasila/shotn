@@ -9,23 +9,27 @@ a {
   -moz-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
+
 a:hover,
 a:focus {
   text-decoration: none;
   color: #fd9b6c;
 }
+
 .logo {
   font-family: 'Tangerine', serif;
   font-size: 60px;
   text-shadow: 4px 4px 4px #aaa;
   font-weight: bold;
 }
-.welcome{
+
+.welcome {
   font-family: 'Lato';
   margin-top: 70px;
   font-size: 72px;
 }
-.simplify-text{
+
+.simplify-text {
   font-family: 'Lato';
 }
 
@@ -39,7 +43,23 @@ a:focus {
     -webkit-box-shadow: 0 8px 6px -6px #aaa;
     -moz-box-shadow: 0 8px 6px -6px #aaa;
     box-shadow: 0 8px 6px -6px #aaa;
+  @media (min-width: 768px) {
+    .navbar-custom {
+      padding: 20px 0;
+      border-bottom: none;
+      letter-spacing: 1px;
+      background: transparent;
+      -webkit-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+      -moz-transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+      transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
+    }
+    .navbar-custom.top-nav-collapse {
+      padding: 0;
+      background: black;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
   }
+}
 
 .intro {
     display: table;
@@ -108,8 +128,9 @@ a:focus {
 
 .shortened-url {
   text-decoration: none;
-  font-size: 24px;
+  font-size: 20px;
   margin-bottom: 50px;
+  color: #fd9b6c;
 }
 
 #popular, #recent, #top-users {

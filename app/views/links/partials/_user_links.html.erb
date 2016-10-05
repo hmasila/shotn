@@ -3,7 +3,7 @@
         <p><%= link.full_url%></p>
         <div class="row">
             <div class="col-md-6">
-                <p><%= link_to "http://shotn/" + link.vanity_string,
+                <p><%= link_to short_link(link),
                 original_url_path(link.vanity_string), target: "_blank" %></p>
             </div>
             <div class="wrapper">

@@ -4,7 +4,7 @@
           <p><%= recentlink.full_url%></p>
           <div class="row">
               <div class="col-md-6">
-                <p><%= link_to root_url + recentlink.vanity_string,
+                <p><%= link_to short_link(recentlink),
                 original_url_path(recentlink.vanity_string), target: "_blank" %></p>
               </div>
               <div class="col-md-6 text-right">

@@ -7,10 +7,6 @@ class User < ApplicationRecord
   VALID_NAME = /\A[^\d]+\z/
   VALID_EMAIL = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
-  scope :top_users, lambda {
-    order('links.count desc').limit(5).select('name', 'links.count')
-  }
-
   validates :name,
             presence: true,
             format: { with: VALID_NAME },
@@ -28,6 +24,13 @@ class User < ApplicationRecord
             format: { with: VALID_EMAIL,
                       message: 'Please use a valid email' }
 
+  scope :top_users, lambda {
+    joins('INNER JOIN links ON links.user_id=users.id')
+      .select('users.name, COUNT(user_id) AS number')
+      .group('users.name')
+      .order('number DESC')
+      .limit 5
+  }
   def encrypt_password
     if password.present?
       self.salt = BCrypt::Engine.generate_salt
