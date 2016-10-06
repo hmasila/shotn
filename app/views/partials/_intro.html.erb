@@ -22,8 +22,8 @@
     <div class="row text-center">
       <div class="col-md-4 col-md-offset-4">
         <span class="shortened-url">
-          <%= flash[:notice] %>
           <% if flash[:notice] %>
+          <%= link_to flash[:notice], flash[:notice], target: "_blank" %>
         <p><a href= "" class="clip_button" data-clipboard-text=<%= flash[:notice] %>>Copy</a></p>
         <% end %>
       </span></div>
