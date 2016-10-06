@@ -15,6 +15,7 @@ gem 'font-awesome-sass', '~> 4.4.0'
 gem 'pismo'
 gem 'valid_url'
 gem 'bcrypt'
+gem 'zeroclipboard-rails'
 
 group :development, :test do
   gem 'rspec-rails'

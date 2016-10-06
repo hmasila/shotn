@@ -5,6 +5,7 @@
             <div class="col-md-6">
                 <p><%= link_to short_link(link),
                 original_url_path(link.vanity_string), target: "_blank" %></p>
+                <%= link.clicks %> clicks
             </div>
             <div class="wrapper">
                 <%= link_to "Manage", edit_link_path(link), class: "details-manage" %>

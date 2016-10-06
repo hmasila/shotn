@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     if @user.save
       user_save_success
     else
-      flash[:danger] = SIGNUP_FAILURE
+      flash[:danger] = @user.errors.full_messages.to_sentence
       redirect_to signup_path
     end
   end
