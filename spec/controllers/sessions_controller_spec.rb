@@ -68,7 +68,7 @@ RSpec.describe SessionsController, type: :controller do
       end
 
       it 'redirects to login path' do
-        expect(response).to redirect_to login_path
+        expect(response).to redirect_to root_path
       end
     end
   end
