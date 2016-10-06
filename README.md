@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/andela-hmasila/shotn.svg?branch=master)](https://travis-ci.org/andela-hmasila/shotn)
+[![Build Status](https://travis-ci.org/andela-hmasila/shotn.svg?branch=branch=deploy-on-heroku-131501519)](https://travis-ci.org/andela-hmasila/shotn)
 
 [![Coverage Status](https://coveralls.io/repos/github/andela-hmasila/shotn/badge.svg?branch=master)](https://coveralls.io/github/andela-hmasila/shotn?branch=deploy-on-heroku-131501519)
 # shotn
