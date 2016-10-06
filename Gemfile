@@ -16,6 +16,7 @@ gem 'pismo'
 gem 'valid_url'
 gem 'bcrypt'
 gem 'zeroclipboard-rails'
+gem 'coveralls', require: false
 
 group :development, :test do
   gem 'rspec-rails'
