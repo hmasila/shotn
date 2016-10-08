@@ -75,6 +75,7 @@ a:focus {
     padding: 100px 0;
     text-align: center;
     color: white;
+    background: url(asset_path('shorten_url')) 0 0;
     background-color: #1862B9;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -148,23 +149,6 @@ a:focus {
   }
 }
 
-#popular, #recent, #top-users {
-  padding-top:40px;
-  padding-bottom: 20px;
-}
-
-#popular {
-  background-color: #EBEFF2;
-}
-
-#recent {
-  background-color: #2D384A;
-}
-
-#top-users {
-  background-color: #FFF;
-}
-
 .label-as-badge {
     border-radius: 1em;
 }
@@ -234,4 +218,8 @@ a:focus {
   height: 85%;
   margin-bottom: 0;
   overflow-y:scroll;
+}
+
+.nav-headers{
+  font-size: 1.5em
 }

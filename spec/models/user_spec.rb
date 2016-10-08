@@ -1,60 +1,34 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  it { is_expected.to have_many(:links) }
+  context 'validations' do
+    it { should validate_presence_of :password }
+    it { should have_secure_password }
+    it { should validate_confirmation_of :password }
 
-  it 'creates a new user when passed with valid attributes' do
-    user = FactoryGirl.create(:user)
-    expect(user).to be_valid
-  end
+    it { should validate_presence_of :email }
+    it { should validate_uniqueness_of :email }
+    it { should allow_value('example@test.com').for(:email) }
 
-  describe '.before_save' do
-    it 'converts all emails to lowercase' do
-      user = create(:user)
-      expect(user.email).to eql 'maslah.kibe@andela.com'
-    end
-    it 'encrypts the password' do
-      user = create(:user, password: 'maslah')
-      user.password_digest = BCrypt::Engine.hash_secret(user.password,
-                                                        user.salt)
-    end
-  end
+    it { should have_db_index :email }
+    it { should have_db_column :link_count }
+    it { should have_db_column :password_digest }
 
-  describe '.validate_name' do
-    it 'must have a name' do
-      expect(build(:user, name: nil)).to_not be_valid
-    end
-    it 'must have a proper length' do
-      expect(build(:user, name: 'f')).to_not be_valid
-    end
-    it 'must have the right characters' do
-    expect(build(:user, name: '9*Yt')).to_not be_valid
+    it { should validate_presence_of :name }
+    it { should_not allow_value('12345').for(:name) }
+    it do
+      should validate_length_of(:name).is_at_least(2)
+        .with_message(/too short. Minimum length is two characters/)
     end
   end
 
-  describe '.validate_email' do
-    it 'must have an email' do
-      expect(build(:user, email: nil)).to_not be_valid
-    end
-
-    it 'must contain only allowed characters' do
-      email = 'maslah.kibe()@.andela.com'
-      expect(build(:user, email: email)).to_not be_valid
-    end
-
-    it 'must be unique' do
-      user1 = create(:user)
-      user2 = build(:user, email: user1.email)
-      expect(user2).to_not be_valid
-    end
+  context 'associations' do
+    it { should have_many(:links) }
   end
 
-  describe '.validate_password' do
-    it 'ensures a password is supplied, it cannot be nil' do
-      expect(build(:user, password: nil)).to_not be_valid
-    end
-    it 'must have the correct length' do
-      expect(build(:user, password: 'an')).to_not be_valid
+  context 'scope' do
+    it 'should return top users depending on their number of links' do
+      expect(User.top_users).to eq ['users.links DESC']
     end
   end
 end

@@ -11,8 +11,8 @@ class LinksController < ApplicationController
   end
 
   def create
-    @link = Link.new(link_params)
-    set_user_id
+    @link = Link.new(full_params)
+    current_user_updates
     if @link.save
       successful_link_creation
     else
@@ -32,7 +32,7 @@ class LinksController < ApplicationController
   end
 
   def update
-    if @link.update(link_params)
+    if @link.update(full_params)
       flash[:success] = LINK_UPDATED
     else
       flash[:danger] = @link.errors.full_messages.to_sentence
@@ -75,8 +75,18 @@ class LinksController < ApplicationController
     params.require(:link).permit(:full_url, :vanity_string, :active)
   end
 
-  def set_user_id
-    @link.user_id = current_user.id if logged_in?
+  def full_params
+    params = link_params
+    params[:user_id] = current_user.id if current_user
+    params[:vanity_string] = SecureRandom.urlsafe_base64(4) if params[:vanity_string].blank?
+    params[:vanity_string] = params[:vanity_string].tr(' ', '_')
+    params
+  end
+
+  def current_user_updates
+    return unless current_user
+    current_user.link_count += 1
+    current_user.save
   end
 
   def successful_link_creation

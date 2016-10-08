@@ -1,6 +1,6 @@
 module LinksHelper
   def strip_time(time)
-    Date.strptime(time.to_s, '%Y-%m-%d')
+    Date.parse(time.to_s).strftime('%Y-%m-%d')
   end
 
   def time_ago(time)

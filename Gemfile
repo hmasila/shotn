@@ -24,6 +24,8 @@ group :development, :test do
   gem 'capybara'
   gem 'pry-rails'
   gem 'rails-controller-testing'
+  gem 'faker'
+  gem 'shoulda-matchers'
 end
 
 group :development do
