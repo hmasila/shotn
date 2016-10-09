@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject(:user) { create(:user) }
+  subject(:user) { create(:user, email: Faker::Internet.email) }
 
   describe 'associations' do
     it { should have_many(:links) }
@@ -50,7 +50,6 @@ RSpec.describe User, type: :model do
         build(:user, password: '1234', password_confirmation: '5678').save
       ).to eql false
     end
-
   end
 
   context 'scope' do
