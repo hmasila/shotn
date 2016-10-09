@@ -1,6 +1,5 @@
-[![Build Status](https://travis-ci.org/andela-hmasila/shotn.svg?branch=branch=deploy-on-heroku-131501519)](https://travis-ci.org/andela-hmasila/shotn)
-
-[![Coverage Status](https://coveralls.io/repos/github/andela-hmasila/shotn/badge.svg?branch=master)](https://coveralls.io/github/andela-hmasila/shotn?branch=deploy-on-heroku-131501519)
+[![Build Status](https://travis-ci.org/andela-hmasila/shotn.svg?branch=develop)](https://travis-ci.org/andela-hmasila/shotn)
+[![Coverage Status](https://coveralls.io/repos/github/andela-hmasila/shotn/badge.svg?branch=develop)](https://coveralls.io/github/andela-hmasila/shotn?branch=develop)
 # shotn
 shotn is a URL shortening service. The application accepts really long URLs and turns them into short URLs for easy use in email and social media. Registered users have the privilege of customizing the shorter URL to a string they can remember. Additionally, the user can update or delete the shortened URL at will.
 
