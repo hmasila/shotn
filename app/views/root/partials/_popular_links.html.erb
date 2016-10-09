@@ -1,9 +1,9 @@
 <% if toplink %>
 <div class="panel panel-default">
   <div class="panel-body">
-    <p>
+    <h5>
       <%= toplink.title %>
-    </p>
+    </h5>
     <p><%= link_to short_link(toplink),
             original_url_path(toplink.vanity_string), target: "_blank" %></p>
     <span class="label label-as-badge label-primary"><%= toplink.clicks%>

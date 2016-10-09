@@ -6,9 +6,10 @@ class LinksController < ApplicationController
   layout 'plain_layout', only: [:error]
 
   include ConstantsHelper
+  include LinksHelper
 
   def index
-    @links = current_user.links
+    @links = sort_links(current_user.links)
   end
 
   def create
@@ -78,15 +79,14 @@ class LinksController < ApplicationController
   def full_params
     params = link_params
     params[:user_id] = current_user.id if current_user
-    params[:vanity_string] = SecureRandom.urlsafe_base64(4) if params[:vanity_string].blank?
-    params[:vanity_string] = params[:vanity_string].tr(' ', '_')
+    params[:vanity_string] = vanity if params[:vanity_string].blank?
+    params[:vanity_string] = params[:vanity_string].gsub(/[^\w]/, '_')
     params
   end
 
   def current_user_updates
     return unless current_user
-    current_user.link_count += 1
-    current_user.save
+    current_user.update_attribute(:link_count, current_user.link_count += 1)
   end
 
   def successful_link_creation

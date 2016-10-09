@@ -16,7 +16,8 @@ class Link < ApplicationRecord
                                           'vanity_string', 'created_at')
   }
   validates :full_url, presence: true, url: true
-  validates :vanity_string, presence: true, uniqueness: true
+  validates :vanity_string, presence: true, uniqueness: true,
+                            length: { maximum: 6 }
   after_create :link_title
 
   def link_title

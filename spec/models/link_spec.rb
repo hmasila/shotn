@@ -26,6 +26,10 @@ RSpec.describe Link, type: :model do
     it 'must have a unique vanity_string' do
       expect(build(:link, vanity_string: link.vanity_string).save).to eql false
     end
+
+    it 'must be less than 6 characters' do
+      expect(build(:link, vanity_string: 'my_vanity_string').save).to eql false
+    end
   end
 
   describe '.after_create' do

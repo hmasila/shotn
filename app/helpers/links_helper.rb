@@ -10,4 +10,14 @@ module LinksHelper
   def short_link(link)
     root_url + link.vanity_string
   end
+
+  def sort_links(links)
+    links.sort_by do |link|
+      link[:created_at]
+    end.reverse!
+  end
+
+  def vanity
+    SecureRandom.urlsafe_base64(4)
+  end
 end
