@@ -11,7 +11,7 @@ module ConstantsHelper
   LOGIN_FAILED = 'Login failed. Email or password is incorrect!'.freeze
   LOGOUT_SUCCESS = 'Successfully logged out'.freeze
   ERROR = 'Error occurred!'.freeze
-  DELETE_SUCCESS = 'Link deleted successfully!'.freeze
+  DELETE_SUCCESS = 'Link deleted successfully'.freeze
   SIGNUP_FAILURE = 'Registration failed'.freeze
   SIGNUP_SUCCESS = 'Registration successful'.freeze
   LOGIN_REQUIRED = 'You must be logged in to access this section'.freeze

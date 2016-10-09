@@ -20,4 +20,9 @@ module Helpers
     allow_any_instance_of(ApplicationController)
       .to receive(:current_user).and_return(user)
   end
+
+  def stub_require_login
+    allow_any_instance_of(ApplicationController)
+      .to receive(:require_login).and_return(true)
+  end
 end

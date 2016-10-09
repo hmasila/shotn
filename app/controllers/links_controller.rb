@@ -1,8 +1,9 @@
 class LinksController < ApplicationController
-  before_action :require_login, only: [:edit, :update, :destroy, :index]
+  before_action :require_login, only: [:edit, :update, :destroy, :index, :show]
   before_action :set_link, only: [:edit, :show, :update, :destroy]
   before_action :find_by_vanity_string, only: [:original_url_path, :error]
   after_action :short_url, only: [:create]
+  layout 'plain_layout', only: [:error]
 
   include ConstantsHelper
 
@@ -28,7 +29,6 @@ class LinksController < ApplicationController
   end
 
   def error
-    render layout: 'plain_layout'
   end
 
   def update
@@ -90,7 +90,7 @@ class LinksController < ApplicationController
   end
 
   def successful_link_creation
-    if logged_in?
+    if current_user
       flash[:success] = SUCCESSFUL_LINK
       redirect_to home_path
     else

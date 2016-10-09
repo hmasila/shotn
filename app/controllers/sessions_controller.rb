@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
   include ConstantsHelper
+  layout 'plain_layout', only: [:new]
 
   def new
-    render layout: 'plain_layout'
     redirect_to home_path if current_user
     @user = User.new
   end

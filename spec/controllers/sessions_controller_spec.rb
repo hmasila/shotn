@@ -21,7 +21,6 @@ RSpec.describe SessionsController, type: :controller do
     context 'with valid credentials' do
       before(:each) do
         post :create, params: { email: user.email, password: user.password }
-        # binding.pry
       end
 
       it 'creates a user session' do

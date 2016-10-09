@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   before_action :require_login, only: [:home]
+  layout 'plain_layout', only: [:new]
 
   include ConstantsHelper
 
   def new
     @user = User.new
-    render layout: 'plain_layout'
   end
 
   def create
