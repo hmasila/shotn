@@ -1,15 +1,19 @@
   <ul class="list-group">
       <li class="list-group-item">
-          <p><%= recentlink.full_url%></p>
+        <% if recentlink %>
+        <h5><%= recentlink.title%></h5>
           <div class="row">
               <div class="col-md-6">
-                <p><%= link_to "http://shotn/" + recentlink.vanity_string,
-                original_url_path(recentlink), target: "_blank" %></p>
+                <p><%= link_to short_link(recentlink),
+                original_url_path(recentlink.vanity_string), target: "_blank" %></p>
               </div>
               <div class="col-md-6 text-right">
                     <span class="label label-as-badge label-primary">
-                    <%= distance_of_time_in_words(recentlink.created_at, Time.now)%> ago</span>
+                    <%=time_ago(recentlink.created_at) %></span>
               </div>
           </div>
+          <% else %>
+          <%= render partial: "root/partials/_no_links" %>
+          <% end %>
       </li>
   </ul>

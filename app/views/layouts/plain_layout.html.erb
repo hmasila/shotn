@@ -8,6 +8,18 @@
         <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
         <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     </head>
+    <div class="flash text-center">
+    <%flash.each do |msg_type, msg|%>
+    <% unless msg_type == "notice" %>
+      <div class="alert alert-<%= msg_type %> alert-dismissible fade in" id="flash" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <%= msg %>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
 
     <body>
     <%= yield %>

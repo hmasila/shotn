@@ -1,20 +1,18 @@
 class SessionsController < ApplicationController
   include ConstantsHelper
+  layout 'plain_layout', only: [:new]
 
   def new
-    render layout: 'plain_layout'
     redirect_to home_path if current_user
     @user = User.new
   end
 
   def create
-    @user = authenticate(params[:email], params[:password])
-    if @user
-      session[:user_id] = @user.id
-      flash[:success] = LOGIN_SUCCESS
-      redirect_to home_path
+    @user = User.find_by_email(params[:email])
+    if @user && @user.authenticate(params[:password])
+      start_session
     else
-      flash[:error] = LOGIN_FAILED
+      flash[:danger] = LOGIN_FAILED
       redirect_to login_path
     end
   end
@@ -22,16 +20,14 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     flash[:success] = LOGOUT_SUCCESS
-    redirect_to login_path
+    redirect_to root_path
   end
 
   private
 
-  def authenticate(email, password)
-    @user = User.where(email: email).first
-    if @user && @user.password_digest == BCrypt::Engine.hash_secret(password,
-                                                                    @user.salt)
-      @user
-    end
+  def start_session
+    session[:user_id] = @user.id
+    flash[:success] = LOGIN_SUCCESS
+    redirect_to home_path
   end
 end

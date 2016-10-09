@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   before_action :require_login, only: [:home]
+  layout 'plain_layout', only: [:new]
 
   include ConstantsHelper
 
   def new
     @user = User.new
-    render layout: 'plain_layout'
   end
 
   def create
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     if @user.save
       user_save_success
     else
-      flash[:error] = SIGNUP_FAILURE
+      flash[:danger] = @user.errors.full_messages.to_sentence
       redirect_to signup_path
     end
   end

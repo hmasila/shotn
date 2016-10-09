@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy', as: :logout
 
   resources :links
-  get '/original_url/:id' => 'links#original_url', as: :original_url
-  get '/error/:id' => 'links#error', as: :error
+  get '/error/:vanity_string' => 'links#error', as: :error
+  get ':vanity_string' => 'links#original_url', as: :original_url
 end

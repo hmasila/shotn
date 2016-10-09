@@ -1,18 +1,14 @@
-<div class="table-responsive col-md-6 col-md-offset-3">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th class="col-md-6">Name</th>
-                <th class="col-md-3">Links</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><%=top_user.username%></td>
-                <td>
-                    <span class="label label-as-badge label-primary"><%=top_user.clicks.count%> clicks</span>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<% if top_user %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <p>
+      <%= top_user.name %>
+    </p>
+    <span class="label label-as-badge label-primary"><%= top_user.link_count%>
+      links</span>
+      <span class="text-right"><%= 'Member since ' + strip_time(top_user.created_at) %></span>
+  </div>
 </div>
+<% else %>
+<%= render partial: "root/partials/no_links" %>
+<% end %>

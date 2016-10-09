@@ -1,60 +1,60 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  it { is_expected.to have_many(:links) }
+  subject(:user) { create(:user, email: Faker::Internet.email) }
 
-  it 'creates a new user when passed with valid attributes' do
-    user = FactoryGirl.create(:user)
-    expect(user).to be_valid
-  end
-
-  describe '.before_save' do
-    it 'converts all emails to lowercase' do
-      user = create(:user)
-      expect(user.email).to eql 'maslah.kibe@andela.com'
-    end
-    it 'encrypts the password' do
-      user = create(:user, password: 'maslah')
-      user.password_digest = BCrypt::Engine.hash_secret(user.password,
-                                                        user.salt)
-    end
+  describe 'associations' do
+    it { should have_many(:links) }
   end
 
   describe '.validate_name' do
     it 'must have a name' do
-      expect(build(:user, name: nil)).to_not be_valid
+      expect(build(:user, name: nil).save).to eq false
     end
+
     it 'must have a proper length' do
-      expect(build(:user, name: 'f')).to_not be_valid
+      expect(build(:user, name: 'A').save).to eql false
     end
+
     it 'must have the right characters' do
-    expect(build(:user, name: '9*Yt')).to_not be_valid
+      expect(build(:user, name: '1234').save).to eql false
     end
   end
 
   describe '.validate_email' do
     it 'must have an email' do
-      expect(build(:user, email: nil)).to_not be_valid
-    end
-
-    it 'must contain only allowed characters' do
-      email = 'maslah.kibe()@.andela.com'
-      expect(build(:user, email: email)).to_not be_valid
+      expect(build(:user, email: nil).save).to eql false
     end
 
     it 'must be unique' do
-      user1 = create(:user)
-      user2 = build(:user, email: user1.email)
-      expect(user2).to_not be_valid
+      expect(build(:user, email: user.email).save).to eql false
+    end
+
+    it 'must not contain odd characters' do
+      expect(build(:user, email: 'weird.character()@.andela.com').save)
+        .to eql false
     end
   end
 
   describe '.validate_password' do
-    it 'ensures a password is supplied, it cannot be nil' do
-      expect(build(:user, password: nil)).to_not be_valid
+    it 'must have a password' do
+      expect(build(:user, password: nil).save).to eql false
     end
+
     it 'must have the correct length' do
-      expect(build(:user, password: 'an')).to_not be_valid
+      expect(build(:user, password: 'less').save).to be false
+    end
+
+    it 'should not be valid with a confirmation mismatch' do
+      expect(
+        build(:user, password: '1234', password_confirmation: '5678').save
+      ).to eql false
+    end
+  end
+
+  context 'scope' do
+    it 'should return top users depending on their number of links' do
+      expect(User.top_users).to_not be_nil
     end
   end
 end

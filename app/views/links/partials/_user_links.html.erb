@@ -1,10 +1,11 @@
 <ul class="list-group">
     <li class="list-group-item">
-        <p><%= link.full_url%></p>
+        <h5><%= link.title%></h5>
         <div class="row">
             <div class="col-md-6">
-                <p><%= link_to "http://shotn/" + link.vanity_string,
-                original_url_path(link), target: "_blank" %></p>
+                <p><%= link_to short_link(link),
+                original_url_path(link.vanity_string), target: "_blank" %></p>
+                <%= link.clicks %> clicks
             </div>
             <div class="wrapper">
                 <%= link_to "Manage", edit_link_path(link), class: "details-manage" %>

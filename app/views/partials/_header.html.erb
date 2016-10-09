@@ -12,7 +12,7 @@
         <div id="navbar" class="navbar-collapse collapse">
 
             <ul class="nav navbar-nav navbar-right">
-              <% if logged_in? %>
+              <% if current_user %>
               <li class="current_user center">
                   <%= link_to current_user.name, home_path %>
               </li>
@@ -31,6 +31,3 @@
         </div>
     </div>
 </nav>
-<% flash.each do |name, msg| %>
-<%= content_tag :div, msg, :id => "flash_#{name}" %>
-<% end %>

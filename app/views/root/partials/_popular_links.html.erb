@@ -1,28 +1,15 @@
-<div class="col-md-6">
-    <% @first_three_links.each do |toplink| %>
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <p><%= toplink.full_url %></p>
-            <p><%= link_to "http://shotn/" + toplink.vanity_string,
-            original_url_path(toplink), target: "_blank" %></p>
-            <span class="label label-as-badge label-primary"><%= toplink.clicks%>
-                clicks</span>
-        </div>
-    </div>
-    <% end %>
-
+<% if toplink %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h5>
+      <%= toplink.title %>
+    </h5>
+    <p><%= link_to short_link(toplink),
+            original_url_path(toplink.vanity_string), target: "_blank" %></p>
+    <span class="label label-as-badge label-primary"><%= toplink.clicks%>
+      clicks</span>
+  </div>
 </div>
-<div class="col-md-6">
-
-    <% @next_two_links.each do |toplink| %>
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <p><%= toplink.full_url %></p>
-            <p><%= link_to "http://shotn/" + toplink.vanity_string,
-            original_url_path(toplink), target: "_blank" %></p>
-            <span class="label label-as-badge label-primary"><%= toplink.clicks%>
-                clicks</span>
-        </div>
-    </div>
-    <% end %>
-</div>
+<% else %>
+<%= render partial: "root/partials/no_links" %>
+<% end %>

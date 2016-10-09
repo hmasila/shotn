@@ -15,6 +15,8 @@ gem 'font-awesome-sass', '~> 4.4.0'
 gem 'pismo'
 gem 'valid_url'
 gem 'bcrypt'
+gem 'zeroclipboard-rails'
+gem 'coveralls', require: false
 
 group :development, :test do
   gem 'rspec-rails'
@@ -22,6 +24,8 @@ group :development, :test do
   gem 'capybara'
   gem 'pry-rails'
   gem 'rails-controller-testing'
+  gem 'faker'
+  gem 'shoulda-matchers'
 end
 
 group :development do
@@ -30,4 +34,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+group :production do
+  gem 'rails_12factor'
+end
