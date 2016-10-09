@@ -49,7 +49,8 @@ Run the following command from the terminal to get all tests running
     $ rspec spec
 
 ### Limitations
-Update limitations later on
+Vanity string can only be less than 6 characters
+A little bit slow when generating a short url
 
 ### Contributing
 
