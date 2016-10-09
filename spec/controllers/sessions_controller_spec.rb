@@ -17,19 +17,20 @@ RSpec.describe SessionsController, type: :controller do
   end
 
   describe 'POST #create' do
+    subject(:user) { create(:user) }
     context 'with valid credentials' do
       before(:each) do
-        user = create(:user)
-        post :create, params: { user: attributes_for(:user) }
+        post :create, params: { email: user.email, password: user.password }
+        # binding.pry
       end
 
       it 'creates a user session' do
-        expect(session[:user_id]).to_not be_nil
+        expect(session[:user_id]).to eq user[:id]
       end
 
       it 'shows successfully logged in' do
         expect(flash[:success]).to eql(
-          'Successfully logged in'
+          'Successfully logged in.'
         )
       end
 

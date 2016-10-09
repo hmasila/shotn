@@ -16,9 +16,13 @@ class User < ApplicationRecord
             format: { with: VALID_EMAIL,
                       message: 'Please use a valid email' }
 
+  validates :password, length: {
+    minimum: 5,
+    confirmation: true
+  }
+
   scope :top_users, lambda {
     order('link_count DESC')
       .limit(5).select('name', 'created_at', 'link_count')
   }
-
 end

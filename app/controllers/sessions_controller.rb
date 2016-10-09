@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = authenticate(params[:email], params[:password])
-    if @user
+    @user = User.find_by_email(params[:email])
+    if @user && @user.authenticate(params[:password])
       start_session
     else
       flash[:danger] = LOGIN_FAILED
@@ -24,14 +24,6 @@ class SessionsController < ApplicationController
   end
 
   private
-
-  def authenticate(email, password)
-    @user = User.where(email: email).first
-    if @user && @user.password_digest == BCrypt::Engine.hash_secret(password,
-                                                                    @user.salt)
-      @user
-    end
-  end
 
   def start_session
     session[:user_id] = @user.id
