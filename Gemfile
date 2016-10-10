@@ -25,7 +25,11 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rails-controller-testing'
   gem 'faker'
+end
+
+group :test do
   gem 'shoulda-matchers'
+  gem 'codeclimate-test-reporter', group: :test, require: nil
 end
 
 group :development do

@@ -2,8 +2,6 @@ class Link < ApplicationRecord
   require 'pismo'
   belongs_to :user, optional: true
 
-  include ConstantsHelper
-
   scope :most_popular, lambda {
     where(deleted: false).order('clicks desc')
                          .limit(5).select('title', 'full_url',
