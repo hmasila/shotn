@@ -124,6 +124,11 @@ a:focus {
         transform: scale(1.2);
     }
 
+    25% {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+    }
+
     100% {
         -webkit-transform: scale(1);
         transform: scale(1);
@@ -139,6 +144,10 @@ a:focus {
     50% {
         -moz-transform: scale(1.2);
         transform: scale(1.2);
+    }
+    25% {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
     }
 
     100% {
