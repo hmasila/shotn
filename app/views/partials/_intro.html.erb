@@ -1,7 +1,7 @@
 <header class="intro">
   <div class="container" height="100%">
     <div class="row" style="margin-top:15%;">
-      <div class="col-md-12">
+      <div class="col-md-12 col-sm-12">
         <div class="flash">
           <%flash.each do |msg_type, msg|%>
           <% unless msg_type == "notice" %>
@@ -20,7 +20,7 @@
         </div>
         <%= render partial: 'links/partials/shorten'%>
         <div class="row text-center">
-          <div class="col-md-4 col-md-offset-4">
+          <div class="col-md-4 col-sm-4 col-md-offset-4">
             <span class="shortened-url">
               <% if flash[:notice] %>
               <%= link_to flash[:notice], flash[:notice], target: "_blank" %>
