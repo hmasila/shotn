@@ -13,6 +13,7 @@ class Link < ApplicationRecord
                          .limit(5).select('title', 'full_url',
                                           'vanity_string', 'created_at')
   }
+
   validates :full_url, presence: true, url: true
   validates :vanity_string, presence: true, uniqueness: true,
                             length: { maximum: 6 }

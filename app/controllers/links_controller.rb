@@ -90,11 +90,10 @@ class LinksController < ApplicationController
   end
 
   def successful_link_creation
+    flash[:success] = SUCCESSFUL_LINK
     if current_user
-      flash[:success] = SUCCESSFUL_LINK
       redirect_to home_path
     else
-      flash[:success] = SUCCESSFUL_LINK
       redirect_to root_url
     end
   end
