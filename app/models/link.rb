@@ -2,17 +2,13 @@ class Link < ApplicationRecord
   require 'pismo'
   belongs_to :user, optional: true
 
-  scope :most_popular, lambda {
-    where(deleted: false).order('clicks desc')
-                         .limit(5).select('title', 'full_url',
-                                          'vanity_string', 'clicks')
-  }
-
-  scope :most_recent, lambda {
-    where(deleted: false).order('created_at desc')
-                         .limit(5).select('title', 'full_url',
-                                          'vanity_string', 'created_at')
-  }
+  scope :most, (lambda do
+                  where(deleted: false).limit(5).select('title', 'full_url',
+                                                        'vanity_string', 'clicks',
+                                                        'created_at')
+                end)
+  scope :popular, -> { order('clicks desc') }
+  scope :recent, -> { order('created_at desc') }
 
   validates :full_url, presence: true, url: true
   validates :vanity_string, presence: true, uniqueness: true,

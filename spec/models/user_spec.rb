@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   it { should have_many(:links) }
-  
+
   it { should validate_presence_of :password }
   it { should have_secure_password }
   it { should validate_confirmation_of :password }
@@ -21,7 +21,6 @@ RSpec.describe User, type: :model do
   it { should_not allow_value('12345').for(:name) }
   it do
     should validate_length_of(:name).is_at_least(2)
-      .with_message(/too short. Minimum length is two characters/)
   end
 
   describe '.top_users' do

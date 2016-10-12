@@ -22,17 +22,17 @@ RSpec.describe Link, type: :model do
     end
   end
 
-  describe '.most_popular' do
+  describe '.most.popular' do
     let(:link) { create(:link, deleted: true) }
     it 'excludes links that are deleted' do
-      expect(Link.most_popular).to_not include(link)
+      expect(Link.most.popular).to_not include(link)
     end
   end
 
-  describe '.most_recent' do
+  describe '.most.recent' do
     let(:link) { create(:link, deleted: true) }
     it'excludes links that are deleted' do
-      expect(Link.most_popular).to_not include(link)
+      expect(Link.most.recent).to_not include(link)
     end
   end
 end
