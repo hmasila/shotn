@@ -33,4 +33,12 @@ RSpec.describe Link, type: :model do
       expect(Link.most.recent).to_not include(link)
     end
   end
+
+  describe '.links' do
+    it 'returns user links from the most recent' do
+      user = create(:user)
+      link = create(:link, user_id: user.id)
+      expect(Link.links(user)).to include(link)
+    end
+  end
 end
