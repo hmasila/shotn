@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Link, type: :model do
-  subject { create :link }
+  subject(:link) { create :link }
   it { should belong_to(:user) }
 
   it { should validate_presence_of :full_url }
@@ -17,7 +17,6 @@ RSpec.describe Link, type: :model do
   it { should have_db_index :user_id }
 
   describe '#link_title' do
-    let(:link) { create(:link) }
     it 'must have a title' do
       expect(link.title).to_not be_nil
     end

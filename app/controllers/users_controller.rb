@@ -2,8 +2,6 @@ class UsersController < ApplicationController
   before_action :require_login, only: [:home]
   layout 'plain_layout', only: [:new]
 
-  include ConstantsHelper
-
   def new
     @user = User.new
   end
@@ -22,7 +20,7 @@ class UsersController < ApplicationController
 
   def user_save_success
     session[:user_id] = @user.id
-    flash[:success] = SIGNUP_SUCCESS
+    flash[:success] = signup_success
     redirect_to home_path
   end
 

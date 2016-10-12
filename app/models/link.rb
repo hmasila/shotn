@@ -9,6 +9,7 @@ class Link < ApplicationRecord
                 end)
   scope :popular, -> { order('clicks desc') }
   scope :recent, -> { order('created_at desc') }
+  scope :links, ->(user) { where(user_id: user.id).order('created_at desc') }
 
   validates :full_url, presence: true, url: true
   validates :vanity_string, presence: true, uniqueness: true,
@@ -18,5 +19,9 @@ class Link < ApplicationRecord
   def link_title
     self.title = Pismo::Document.new(full_url).title
     save
+  end
+
+  def self.vanity
+    SecureRandom.urlsafe_base64(4)
   end
 end

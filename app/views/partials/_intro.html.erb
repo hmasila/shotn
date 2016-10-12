@@ -24,9 +24,7 @@
             <span class="shortened-url">
               <% if flash[:notice] %>
               <%= link_to flash[:notice], flash[:notice], target: "_blank" %>
-              <p>
                 <a href="" class="clip_button" data-clipboard-text=<%= flash[:notice] %>>Copy</a>
-              </p>
               <% end %>
             </span>
           </div>
