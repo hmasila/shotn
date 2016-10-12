@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
 
   def start_session
     session[:user_id] = @user.id
-    flash[:success] = logout_success
+    flash[:success] = login_success
     redirect_to home_path
   end
 end

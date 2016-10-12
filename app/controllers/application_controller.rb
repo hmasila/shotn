@@ -15,11 +15,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def short_url
-    return unless @link.vanity_string
-    flash[:notice] = root_url + @link.vanity_string
-  end
-
   def update_user_link_count
     return unless current_user
     current_user.update_attribute(:link_count, current_user.link_count += 1)

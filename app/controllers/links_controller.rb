@@ -1,6 +1,7 @@
 class LinksController < ApplicationController
   before_action :require_login, only: [:edit, :update, :destroy, :index, :show]
   before_action :set_link, only: [:edit, :show, :update, :destroy]
+  before_action :find_by_vanity_string, only: [:error]
   after_action :short_url, only: [:create]
   layout 'plain_layout', only: [:error]
 
@@ -58,6 +59,11 @@ class LinksController < ApplicationController
     return unless redirect_to @link.full_url
     @link.clicks += 1
     @link.save
+  end
+
+  def short_url
+    return unless @link.vanity_string
+    flash[:notice] = root_url + @link.vanity_string
   end
 
   def find_by_vanity_string

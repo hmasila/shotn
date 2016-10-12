@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Link, type: :model do
-  subject(:link) { create :link }
+  subject(:link) { create :link, deleted: true }
   it { should belong_to(:user) }
 
   it { should validate_presence_of :full_url }
@@ -23,14 +23,12 @@ RSpec.describe Link, type: :model do
   end
 
   describe '.most.popular' do
-    let(:link) { create(:link, deleted: true) }
     it 'excludes links that are deleted' do
       expect(Link.most.popular).to_not include(link)
     end
   end
 
   describe '.most.recent' do
-    let(:link) { create(:link, deleted: true) }
     it'excludes links that are deleted' do
       expect(Link.most.recent).to_not include(link)
     end
