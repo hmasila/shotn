@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Link, type: :model do
+  subject { create :link }
   it { should belong_to(:user) }
 
   it { should validate_presence_of :full_url }
