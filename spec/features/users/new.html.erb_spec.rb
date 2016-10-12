@@ -36,7 +36,7 @@ RSpec.describe 'users/new.html.erb', type: :feature do
   scenario 'when user tries to sign up with names less than 2' do
     sign_up_with('a', Faker::Internet.free_email, @password, @password)
     expect(page.current_path).to eq '/signup'
-    expect(page).to have_content 'Name too short'
+    expect(page).to have_content 'Name is too short'
   end
 
   scenario 'when user tries to sign up with password less than 5' do

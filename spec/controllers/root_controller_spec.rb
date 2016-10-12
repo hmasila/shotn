@@ -20,11 +20,11 @@ RSpec.describe RootController, type: :controller do
     end
 
     it 'assigns @top_links to the top 5 links' do
-      expect(assigns(:top_links)).to eq Link.most_popular
+      expect(assigns(:top_links)).to eq Link.most.popular
     end
 
     it 'assigns @recent_links to the 5 most recently created links' do
-      expect(assigns(:recent_links)).to eq Link.most_recent
+      expect(assigns(:recent_links)).to eq Link.most.recent
     end
   end
 end
