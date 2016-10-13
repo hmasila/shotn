@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe RootController, type: :controller do
   describe 'GET #index' do
-    before(:each) { get :index }
+    before(:all) { get :index }
     it 'returns a status code of 200' do
       expect(response.status).to eq 200
     end
@@ -20,11 +20,11 @@ RSpec.describe RootController, type: :controller do
     end
 
     it 'assigns @top_links to the top 5 links' do
-      expect(assigns(:top_links)).to eq Link.most.popular
+      expect(assigns(:top_links)).to eq Link.most_popular
     end
 
     it 'assigns @recent_links to the 5 most recently created links' do
-      expect(assigns(:recent_links)).to eq Link.most.recent
+      expect(assigns(:recent_links)).to eq Link.most_recent
     end
   end
 end

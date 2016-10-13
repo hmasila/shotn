@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Link, type: :model do
   subject(:link) { create :link, deleted: true }
+  subject(:active_link) { create :link, deleted: false }
   it { should belong_to(:user) }
 
   it { should validate_presence_of :full_url }
@@ -17,20 +18,32 @@ RSpec.describe Link, type: :model do
   it { should have_db_index :user_id }
 
   describe '#link_title' do
-    it 'must have a title' do
+    it 'creates the link title' do
+      expect(link.title).to eq 'Google'
+    end
+
+    it 'link title should not be nil' do
       expect(link.title).to_not be_nil
     end
   end
 
-  describe '.most.popular' do
+  describe '.most_popular' do
     it 'excludes links that are deleted' do
-      expect(Link.most.popular).to_not include(link)
+      expect(Link.most_popular).to_not include(link)
+    end
+
+    it 'should include active_link' do
+      expect(Link.most_popular.last.title).to eq active_link.title
     end
   end
 
-  describe '.most.recent' do
+  describe '.most_recent' do
     it'excludes links that are deleted' do
-      expect(Link.most.recent).to_not include(link)
+      expect(Link.most_recent).to_not include(link)
+    end
+
+    it 'should include active_link' do
+      expect(Link.most_recent.last.title).to eq active_link.title
     end
   end
 
