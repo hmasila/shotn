@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe RootController, type: :controller do
   describe 'GET #index' do
-    before(:all) { get :index }
+    before(:each) { get :index }
     it 'returns a status code of 200' do
       expect(response.status).to eq 200
     end

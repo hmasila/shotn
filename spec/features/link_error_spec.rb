@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'links/error.html.erb', type: :feature do
+RSpec.describe 'Deleted or Inactive links', type: :feature do
   scenario 'when link is Inactive' do
     @error_link = create(:link, full_url: 'https://google.com/', active: false)
     visit "/#{@error_link.vanity_string}"
