@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Link, type: :model do
   subject(:link) { create :link, deleted: true }
-  subject(:active_link) { create :link, deleted: false }
+
   it { should belong_to(:user) }
 
   it { should validate_presence_of :full_url }
@@ -33,7 +33,8 @@ RSpec.describe Link, type: :model do
     end
 
     it 'should include active_link' do
-      expect(Link.most_popular.last.title).to eq active_link.title
+      popular_link = (create :link)
+      expect(Link.most_popular.last.title).to eq popular_link.title
     end
   end
 
@@ -43,7 +44,8 @@ RSpec.describe Link, type: :model do
     end
 
     it 'should include active_link' do
-      expect(Link.most_recent.last.title).to eq active_link.title
+      recent_link = (create :link)
+      expect(Link.most_recent.last.title).to eq recent_link.title
     end
   end
 

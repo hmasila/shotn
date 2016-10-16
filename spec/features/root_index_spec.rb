@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Shotn Root page', type: :feature do
-  let(:user) { create(:user) }
+  let!(:user) { create(:user) }
 
-  let(:link) { create(:link, user_id: user.id) }
+  let!(:link) { create(:link, user_id: user.id) }
 
   scenario 'user visits index page' do
     visit root_path
@@ -27,6 +27,6 @@ RSpec.describe 'Shotn Root page', type: :feature do
   scenario 'user clicks on top_users' do
     visit root_path
     click_link 'Top Users'
-    expect(page).to have_content user.name
+    expect(page).to have_content 'Member since'
   end
 end

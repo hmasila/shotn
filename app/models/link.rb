@@ -19,7 +19,7 @@ class Link < ApplicationRecord
   validates :full_url, presence: true, url: true
   validates :vanity_string, presence: true, uniqueness: true,
                             length: { maximum: 6 }
-  #after_create :link_title
+  after_create :link_title
 
   def link_title
     self.title = Pismo::Document.new(full_url).title
