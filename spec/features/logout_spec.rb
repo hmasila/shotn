@@ -5,7 +5,7 @@ RSpec.describe 'User Logout', type: :feature do
 
   before(:each) { sign_in_with(user.email, user.password) }
 
-  scenario 'user logs in' do
+  scenario 'when user logs in' do
     visit home_path
     expect(page).to have_content 'Logout'
   end

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Shotn Root page', type: :feature do
   let(:user) { create(:user) }
+
   let(:link) { create(:link, user_id: user.id) }
 
   scenario 'user visits index page' do

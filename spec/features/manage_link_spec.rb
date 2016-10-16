@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Manage Link', type: :feature do
   let(:user) { create(:user) }
+
   let(:update_vanity) { Faker::Internet.password(2, 6) }
 
   before do
@@ -49,10 +50,5 @@ RSpec.describe 'Manage Link', type: :feature do
     click_button 'Update'
     expect(page.current_path).to eq '/home'
     expect(page).to have_content 'updated successfully'
-  end
-
-  scenario 'user clicks a deactivated link' do
-    first(:link, root_url + @vanity).click
-    expect(page).to have_content 'deactivated by owner'
   end
 end
