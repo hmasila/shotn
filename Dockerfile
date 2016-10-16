@@ -1,16 +1,15 @@
-FROM rails:5.0.0
+FROM ruby:2.3.0
 
 MAINTAINER Maslah <hannah.masila@andela.com>
 
-RUN mkdir -p /code
-WORKDIR /code
+RUN apt-get update -qq && apt-get install -y build-essential libpq-dev
 
-EXPOSE 3000
-CMD rails s
+RUN mkdir /shot
+WORKDIR /shot
 
 RUN apt-get update && apt-get install -y nodejs --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
-COPY Gemfile Gemfile.lock ./
+COPY Gemfile Gemfile.lock /shot/
 
 RUN bundle install
-COPY . /code
+COPY . /shot
