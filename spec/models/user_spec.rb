@@ -1,58 +1,29 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject(:user) { create(:user, email: Faker::Internet.email) }
+  it { should have_many(:links) }
 
-  describe 'associations' do
-    it { should have_many(:links) }
+  it { should validate_presence_of :password }
+  it { should have_secure_password }
+  it { should validate_confirmation_of :password }
+  it { should validate_length_of(:password).is_at_least(5) }
+
+  it { should validate_presence_of :email }
+  it { should validate_uniqueness_of :email }
+  it { should_not allow_value('examp@le@test.com').for(:email) }
+
+  it { should have_db_index :email }
+  it { should have_db_column :link_count }
+  it { should have_db_column :password_digest }
+  it { should have_db_column :email }
+
+  it { should validate_presence_of :name }
+  it { should_not allow_value('12345').for(:name) }
+  it do
+    should validate_length_of(:name).is_at_least(2)
   end
 
-  describe '.validate_name' do
-    it 'must have a name' do
-      expect(build(:user, name: nil).save).to eq false
-    end
-
-    it 'must have a proper length' do
-      expect(build(:user, name: 'A').save).to eql false
-    end
-
-    it 'must have the right characters' do
-      expect(build(:user, name: '1234').save).to eql false
-    end
-  end
-
-  describe '.validate_email' do
-    it 'must have an email' do
-      expect(build(:user, email: nil).save).to eql false
-    end
-
-    it 'must be unique' do
-      expect(build(:user, email: user.email).save).to eql false
-    end
-
-    it 'must not contain odd characters' do
-      expect(build(:user, email: 'weird.character()@.andela.com').save)
-        .to eql false
-    end
-  end
-
-  describe '.validate_password' do
-    it 'must have a password' do
-      expect(build(:user, password: nil).save).to eql false
-    end
-
-    it 'must have the correct length' do
-      expect(build(:user, password: 'less').save).to be false
-    end
-
-    it 'should not be valid with a confirmation mismatch' do
-      expect(
-        build(:user, password: '1234', password_confirmation: '5678').save
-      ).to eql false
-    end
-  end
-
-  context 'scope' do
+  describe '.top_users' do
     it 'should return top users depending on their number of links' do
       expect(User.top_users).to_not be_nil
     end

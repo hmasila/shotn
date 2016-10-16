@@ -8,21 +8,19 @@ class User < ApplicationRecord
   validates :name,
             presence: true,
             format: { with: VALID_NAME },
-            length: { minimum: 2,
-                      message: 'too short. Minimum length is two characters' }
+            length: { minimum: 2 }
   validates :email,
             presence: true,
             uniqueness: true,
-            format: { with: VALID_EMAIL,
-                      message: 'Please use a valid email' }
+            format: { with: VALID_EMAIL }
 
   validates :password, length: {
     minimum: 5,
     confirmation: true
   }
 
-  scope :top_users, lambda {
+  scope :top_users, (lambda do
     order('link_count DESC')
       .limit(5).select('name', 'created_at', 'link_count')
-  }
+  end )
 end

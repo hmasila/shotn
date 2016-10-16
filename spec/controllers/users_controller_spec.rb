@@ -20,7 +20,7 @@ RSpec.describe UsersController, type: :controller do
     context 'with valid attributes' do
       let(:user_valid_request) do
         post :create, params: {
-          user: FactoryGirl.attributes_for(:user, id: 1)
+          user: attributes_for(:user, id: 1)
         }
       end
 
@@ -43,8 +43,7 @@ RSpec.describe UsersController, type: :controller do
     context 'with invalid attributes' do
       let(:user_invalid_request) do
         post :create, params: {
-          user: FactoryGirl.attributes_for(:user, name: nil,
-                                                  email: nil, password: nil)
+          user: attributes_for(:user, name: nil, email: nil, password: nil)
         }
       end
 

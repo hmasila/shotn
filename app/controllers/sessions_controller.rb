@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  include ConstantsHelper
   layout 'plain_layout', only: [:new]
 
   def new
@@ -12,14 +11,14 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:password])
       start_session
     else
-      flash[:danger] = LOGIN_FAILED
+      flash[:danger] = login_failed
       redirect_to login_path
     end
   end
 
   def destroy
     session[:user_id] = nil
-    flash[:success] = LOGOUT_SUCCESS
+    flash[:success] = logout_success
     redirect_to root_path
   end
 
@@ -27,7 +26,7 @@ class SessionsController < ApplicationController
 
   def start_session
     session[:user_id] = @user.id
-    flash[:success] = LOGIN_SUCCESS
+    flash[:success] = login_success
     redirect_to home_path
   end
 end

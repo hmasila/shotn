@@ -1,20 +1,17 @@
 class LinksController < ApplicationController
   before_action :require_login, only: [:edit, :update, :destroy, :index, :show]
   before_action :set_link, only: [:edit, :show, :update, :destroy]
-  before_action :find_by_vanity_string, only: [:original_url_path, :error]
+  before_action :find_by_vanity_string, only: [:error]
   after_action :short_url, only: [:create]
   layout 'plain_layout', only: [:error]
 
-  include ConstantsHelper
-  include LinksHelper
-
   def index
-    @links = sort_links(current_user.links)
+    @links = Link.links(current_user)
   end
 
   def create
     @link = Link.new(full_params)
-    current_user_updates
+    update_user_link_count
     if @link.save
       successful_link_creation
     else
@@ -34,7 +31,7 @@ class LinksController < ApplicationController
 
   def update
     if @link.update(full_params)
-      flash[:success] = LINK_UPDATED
+      flash[:success] = link_updated
     else
       flash[:danger] = @link.errors.full_messages.to_sentence
     end
@@ -43,7 +40,7 @@ class LinksController < ApplicationController
 
   def destroy
     @link.update(deleted: true)
-    flash[:success] = DELETE_SUCCESS
+    flash[:success] = delete_sucess
     redirect_to home_path
   end
 
@@ -64,6 +61,11 @@ class LinksController < ApplicationController
     @link.save
   end
 
+  def short_url
+    return unless @link.vanity_string
+    flash[:notice] = root_url + @link.vanity_string
+  end
+
   def find_by_vanity_string
     @link = Link.find_by(vanity_string: params[:vanity_string])
   end
@@ -79,28 +81,17 @@ class LinksController < ApplicationController
   def full_params
     params = link_params
     params[:user_id] = current_user.id if current_user
-    params[:vanity_string] = vanity if params[:vanity_string].blank?
+    params[:vanity_string] = Link.vanity if params[:vanity_string].blank?
     params[:vanity_string] = params[:vanity_string].gsub(/[^\w]/, '_')
     params
   end
 
-  def current_user_updates
-    return unless current_user
-    current_user.update_attribute(:link_count, current_user.link_count += 1)
-  end
-
   def successful_link_creation
+    flash[:success] = successful_link
     if current_user
-      flash[:success] = SUCCESSFUL_LINK
       redirect_to home_path
     else
-      flash[:success] = SUCCESSFUL_LINK
       redirect_to root_url
     end
-  end
-
-  def short_url
-    return unless @link.vanity_string
-    flash[:notice] = root_url + @link.vanity_string
   end
 end
