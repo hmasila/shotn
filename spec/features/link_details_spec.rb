@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Display Link Details', type: :feature do
   let(:user) { create(:user) }
 
-  before(:each) do
+  before do
     sign_in_with(user.email, user.password)
     create_link
     find_link_id

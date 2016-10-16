@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'sessions/new.html.erb', type: :feature do
-  before(:all) do
+  before do
     @user = create(:user)
     @email = @user.email
     @password = @user.password

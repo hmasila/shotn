@@ -4,13 +4,17 @@ RSpec.describe LinksController, type: :controller do
   describe '#create' do
     context 'with valid parameters' do
       let(:vanity_string) { 'test' }
-      before(:each) do
+
+      subject(:link) { create(:link) }
+
+      let(:message) { 'Link generated successfully.' }
+
+      before do
         post :create, params: {
           link: attributes_for(:link, vanity_string: vanity_string)
         }
       end
-      subject(:link) { create(:link) }
-      let(:message) { 'Link generated successfully.' }
+
       it 'should succeed' do
         expect { subject }.to change(Link, :count).by(1)
         expect(flash[:success]).to eq message
@@ -24,23 +28,25 @@ RSpec.describe LinksController, type: :controller do
 
     context 'when user is logged in' do
       let(:user) { create :user }
-      before(:each) do
+      before do
         stub_current_user(user)
         post :create, params: {
           link: attributes_for(:link, vanity_string: 'test')
         }
       end
+
       it 'redirects to home path' do
         expect(response).to redirect_to home_path
       end
     end
 
     context 'when user is not logged in' do
-      before(:each) do
+      before do
         post :create, params: {
           link: attributes_for(:link, vanity_string: 'test')
         }
       end
+
       it 'redirects to root path' do
         expect(response).to redirect_to root_path
       end
@@ -52,6 +58,7 @@ RSpec.describe LinksController, type: :controller do
           link: attributes_for(:link, full_url: nil)
         }
       end
+
       it 'should not succeed' do
         expect(assigns[:link].errors[:full_url]).to include "can't be blank"
         expect(flash[:danger]).to be_present
@@ -70,7 +77,8 @@ RSpec.describe LinksController, type: :controller do
   describe '#index' do
     context 'when user is logged in' do
       let(:user) { create :user }
-      before(:each) do
+
+      before do
         stub_current_user(user)
         get :index
       end
@@ -91,11 +99,14 @@ RSpec.describe LinksController, type: :controller do
 
   describe '#show' do
     let(:user) { create :user }
+
     let(:link) { create :link }
-    before(:each) do
+
+    before do
       stub_current_user(user)
       get :show, params: { id: link.id }
     end
+
     it 'renders show template' do
       expect(response).to render_template :show
     end
@@ -107,11 +118,14 @@ RSpec.describe LinksController, type: :controller do
 
   describe '#edit' do
     let(:user) { create :user }
+
     let(:link) { create :link }
-    before(:each) do
+
+    before do
       stub_current_user(user)
       get :edit, params: { id: link.id }
     end
+
     it 'renders edit template' do
       expect(response).to render_template :edit
     end
@@ -123,11 +137,14 @@ RSpec.describe LinksController, type: :controller do
 
   describe '#update' do
     let(:user) { create :user }
+
     let!(:link) { create(:link, vanity_string: 'update') }
-    before(:each) do
+
+    before do
       stub_current_user(user)
       put :update, params: { id: link.id, link: attributes_for(:link) }
     end
+
     it 'redirects to home path' do
       expect(response).to redirect_to home_path
     end
@@ -154,13 +171,16 @@ RSpec.describe LinksController, type: :controller do
   end
 
   describe '#original_url' do
-    before(:each) do
+    before do
       get :original_url, params: { vanity_string: link.vanity_string }
     end
+
     subject(:link) { create(:link) }
+
     it 'returns a 302 status' do
       expect(response.status).to eq 302
     end
+
     context 'when link is active and not deleted' do
       it 'redirects to full url' do
         expect(response).to redirect_to link.full_url
@@ -169,6 +189,7 @@ RSpec.describe LinksController, type: :controller do
 
     context 'when link is inactive and deleted' do
       let(:link) { create(:link, deleted: true) }
+
       it 'redirects to error path' do
         expect(response).to redirect_to error_path
       end
@@ -177,11 +198,14 @@ RSpec.describe LinksController, type: :controller do
 
   describe '#destroy' do
     let(:user) { create :user }
+
     let(:link) { create(:link) }
-    before(:each) do
+
+    before do
       stub_current_user(user)
       delete :destroy, params: { id: link.id }
     end
+
     it 'sets link to deleted' do
       expect(assigns(:link).deleted).to eql true
     end
@@ -201,10 +225,15 @@ RSpec.describe LinksController, type: :controller do
 
   describe 'error' do
     let(:link) { create(:link) }
-    before(:each) { get :error, params: { vanity_string: link.vanity_string } }
+
+    before(:each) do
+      get :error, params: { vanity_string: link.vanity_string }
+    end
+
     it 'renders plain layout' do
       expect(response).to render_template 'plain_layout'
     end
+    
     it 'returns a 200 status' do
       expect(response.status).to eq 200
     end

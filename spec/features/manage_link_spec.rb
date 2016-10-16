@@ -30,19 +30,14 @@ RSpec.describe 'Manage Link', type: :feature do
   scenario 'user deletes a link' do
     click_link 'Delete'
     expect(page.current_path).to eq '/home'
-  end
-
-  scenario 'user clicks a deleted link' do
-    click_link 'Delete'
-    first(:link, root_url + @vanity).click
     expect(page).to have_content 'deleted'
   end
 
   scenario 'user deactivates a link' do
     choose 'Inactive'
     click_button 'Update'
-    expect(page).to have_content 'updated successfully'
     expect(page.current_path).to eq '/home'
+    expect(page).to have_content 'updated successfully'
   end
 
   scenario 'user reactivates a deactivated link' do

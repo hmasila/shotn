@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'User Logout', type: :feature do
   let(:user) { create(:user) }
 
-  before(:each) { sign_in_with(user.email, user.password) }
+  before { sign_in_with(user.email, user.password) }
 
   scenario 'when user logs in' do
     visit home_path
