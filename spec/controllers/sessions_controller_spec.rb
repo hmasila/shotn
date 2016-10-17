@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe SessionsController, type: :controller do
   describe 'GET #new' do
     before(:each) {  get :new }
-    it 'returns http success' do
+    it 'returns a status response of 200' do
       expect(response.status).to eq 200
     end
 
@@ -18,12 +18,13 @@ RSpec.describe SessionsController, type: :controller do
 
   describe 'POST #create' do
     subject(:user) { create(:user) }
+
     context 'with valid credentials' do
       before(:each) do
         post :create, params: { email: user.email, password: user.password }
       end
 
-      it 'creates a user session' do
+      it 'sets session id to the user id' do
         expect(session[:user_id]).to eq user[:id]
       end
 
@@ -49,15 +50,18 @@ RSpec.describe SessionsController, type: :controller do
         create(:user)
         post :create, params: { user: attributes_for(:user, email: nil) }
       end
+
       it 'redirects to login path' do
         user
         expect(response).to redirect_to login_path
       end
+
       it 'raises an error' do
         expect(flash[:danger]).to eql(
           'Login failed. Email or password is incorrect!'
         )
       end
+
       it 'should not have a session' do
         expect(session[:id]).to be_nil
       end
@@ -66,7 +70,8 @@ RSpec.describe SessionsController, type: :controller do
 
   describe 'DELETE #destroy' do
     before(:each) { get :destroy }
-    context 'when user logged in' do
+    
+    context 'when user is logged in' do
       it 'destroys user session' do
         expect(session[:user_id]).to be_nil
       end
