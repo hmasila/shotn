@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe UsersController, type: :controller do
   describe 'GET #new' do
     before(:each) { get :new }
+
     it 'returns a status code of 200' do
       expect(response.status).to eq 200
     end
@@ -17,14 +18,14 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'POST #create' do
-    context 'with valid attributes' do
+    context 'with valid user attributes' do
       let(:user_valid_request) do
         post :create, params: {
           user: attributes_for(:user, id: 1)
         }
       end
 
-      it 'creates a new User' do
+      it 'increments users count by 1' do
         expect do
           user_valid_request
         end.to change(User, :count).by(1)
@@ -47,7 +48,7 @@ RSpec.describe UsersController, type: :controller do
         }
       end
 
-      it 'does not create a new User' do
+      it 'does not increment user count' do
         expect do
           user_invalid_request
         end.to change(User, :count).by(0)

@@ -50,7 +50,7 @@ RSpec.describe Link, type: :model do
   end
 
   describe '.links' do
-    it 'returns user links from the most recent' do
+    it 'returns user links starting with the most recent' do
       user = create(:user, email: 'user@email.com')
       link = create(:link, user_id: user.id)
       expect(Link.links(user)).to include(link)

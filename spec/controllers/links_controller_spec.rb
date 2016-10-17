@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe LinksController, type: :controller do
   describe '#create' do
-    context 'with valid parameters' do
+    context 'when link has valid parameters' do
       let(:vanity_string) { 'test' }
 
       subject(:link) { create(:link) }
@@ -15,7 +15,7 @@ RSpec.describe LinksController, type: :controller do
         }
       end
 
-      it 'should succeed' do
+      it 'should increase link count by 1' do
         expect { subject }.to change(Link, :count).by(1)
         expect(flash[:success]).to eq message
         expect(flash[:notice]).to eq root_url + vanity_string
@@ -52,14 +52,14 @@ RSpec.describe LinksController, type: :controller do
       end
     end
 
-    context 'with invalid parameters' do
+    context 'when link has invalid parameters' do
       before(:each) do
         post :create, params: {
           link: attributes_for(:link, full_url: nil)
         }
       end
 
-      it 'should not succeed' do
+      it 'should not increase link count by 1' do
         expect(assigns[:link].errors[:full_url]).to include "can't be blank"
         expect(flash[:danger]).to be_present
       end
@@ -153,13 +153,13 @@ RSpec.describe LinksController, type: :controller do
       expect(response.status).to eq 302
     end
 
-    context 'when parameters are valid' do
+    context 'when link parameters are valid' do
       it 'updates the link' do
         expect(flash[:success]).to eq 'Link updated successfully'
       end
     end
 
-    context 'when parameters are invalid' do
+    context 'when link parameters are invalid' do
       it 'raises an error' do
         put :update, params: {
           id: link.id, link: attributes_for(:link, full_url: nil)
@@ -218,7 +218,7 @@ RSpec.describe LinksController, type: :controller do
       expect(response.status).to eq 302
     end
 
-    it 'sets a flash' do
+    it 'sets a success flash' do
       expect(flash[:success]).to eq 'Link deleted successfully'
     end
   end
@@ -233,7 +233,7 @@ RSpec.describe LinksController, type: :controller do
     it 'renders plain layout' do
       expect(response).to render_template 'plain_layout'
     end
-    
+
     it 'returns a 200 status' do
       expect(response.status).to eq 200
     end
