@@ -155,7 +155,7 @@ RSpec.describe LinksController, type: :controller do
 
     context 'when link parameters are valid' do
       it "updates the link's vanity_string" do
-        expect(link.vanity_string).to eq 'update'
+        expect(link.reload.vanity_string).to eq 'update'
         expect(flash[:success]).to eq 'Link updated successfully'
       end
     end
