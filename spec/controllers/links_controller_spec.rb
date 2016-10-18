@@ -59,7 +59,7 @@ RSpec.describe LinksController, type: :controller do
         }
       end
 
-      it 'should not increase link count by 1' do
+      it 'should display an error message' do
         expect(assigns[:link].errors[:full_url]).to include "can't be blank"
         expect(flash[:danger]).to be_present
       end
@@ -138,11 +138,11 @@ RSpec.describe LinksController, type: :controller do
   describe '#update' do
     let(:user) { create :user }
 
-    let!(:link) { create(:link, vanity_string: 'update') }
+    let!(:link) { create(:link) }
 
     before do
       stub_current_user(user)
-      put :update, params: { id: link.id, link: attributes_for(:link) }
+      put :update, params: { id: link.id, link: attributes_for(:link, vanity_string: 'update') }
     end
 
     it 'redirects to home path' do
@@ -154,7 +154,8 @@ RSpec.describe LinksController, type: :controller do
     end
 
     context 'when link parameters are valid' do
-      it 'updates the link' do
+      it "updates the link's vanity_string" do
+        expect(link.vanity_string).to eq 'update'
         expect(flash[:success]).to eq 'Link updated successfully'
       end
     end
