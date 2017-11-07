@@ -1,0 +1,16 @@
+<ul class="list-group">
+    <li class="list-group-item">
+        <h4><%= link.title%></h4>
+        <div class="row">
+            <div class="col-md-6">
+                <%= link_to short_link(link),
+                original_url_path(link.vanity_string), target: "_blank" %>
+              <h5>  <%= link.clicks %> clicks</h5>
+            </div>
+            <div class="wrapper">
+                <%= link_to "Manage", edit_link_path(link), class: "details-manage" %>
+                <%= link_to "Details", link_path(link), class: "details-manage" %>
+            </div>
+        </div>
+    </li>
+</ul>

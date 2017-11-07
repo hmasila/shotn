@@ -1,0 +1,36 @@
+<%= render partial: 'partials/intro'%>
+  <div class="row">
+    <div class="col-md-8 col-sm-8 col-md-offset-2">
+      <div class="panel with-nav-tabs">
+        <div class="panel-heading">
+          <ul class="nav nav-tabs nav-headers">
+            <li class="active">
+              <a href="#popular_links" data-toggle="tab">Popular Links</a>
+            </li>
+            <li>
+              <a href="#recent_links" data-toggle="tab">Recent Links</a>
+            </li>
+            <li class >
+              <a href="#top_users" data-toggle="tab">Top Users</a>
+            </li>
+          </ul>
+        </div>
+        <div class="panel-body">
+          <div class="tab-content">
+            <div class="tab-pane fade in active" id="popular_links">
+              <%= render partial: 'root/partials/popular_links',
+                collection: @top_links, as: :toplink %>
+            </div>
+            <div class="tab-pane fade in" id="recent_links">
+              <%= render partial: 'root/partials/recent_links',
+                     collection: @recent_links, as: :recentlink %>
+            </div>
+            <div class="tab-pane fade in col-md-6 col-md-offset-3" id="top_users">
+              <%= render partial: 'root/partials/top_users',
+                  collection: @top_users, as: :top_user %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

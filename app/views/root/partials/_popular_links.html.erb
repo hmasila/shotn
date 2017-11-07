@@ -1,0 +1,21 @@
+<% if toplink %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <h4>
+          <%= toplink.title %>
+        </h4>
+        <%= link_to short_link(toplink),
+            original_url_path(toplink.vanity_string), target: "_blank" %>
+        <div class="text-right">
+          <span class="label label-as-badge label-primary"><%= toplink.clicks%>
+            clicks</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% else %>
+<%= render partial: "root/partials/no_links" %>
+<% end %>

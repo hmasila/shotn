@@ -1,0 +1,14 @@
+<% if top_user %>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h5>
+      <%= top_user.name %>
+    </h5>
+    <span class="label label-as-badge label-primary"><%= top_user.link_count%>
+      links</span>
+      <span class="text-right"><%= 'Member since ' + strip_time(top_user.created_at) %></span>
+  </div>
+</div>
+<% else %>
+<%= render partial: "root/partials/no_links" %>
+<% end %>
