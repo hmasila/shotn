@@ -32,7 +32,7 @@ RSpec.describe Link, type: :model do
       expect(Link.most_popular).to_not include(link)
     end
 
-    it 'should include active_link' do
+    it 'should include popular_link' do
       popular_link = (create :link)
       expect(Link.most_popular.last.title).to eq popular_link.title
     end
@@ -43,7 +43,7 @@ RSpec.describe Link, type: :model do
       expect(Link.most_recent).to_not include(link)
     end
 
-    it 'should include active_link' do
+    it 'should include recent_link' do
       recent_link = (create :link)
       expect(Link.most_recent.last.title).to eq recent_link.title
     end
