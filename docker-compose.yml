@@ -1,0 +1,13 @@
+version: '2'
+services:
+  db:
+    image: postgres
+  web:
+    build: .
+    command: rails s
+    volumes:
+      - .:/myapp
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
