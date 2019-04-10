@@ -4,13 +4,13 @@
       <div class="col-md-12 col-sm-12">
         <div class="flash">
           <%flash.each do |msg_type, msg|%>
-          <% unless msg_type == "notice" %>
-          <div class="alert alert-<%= msg_type %> alert-dismissible fade in" id="flash" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <%= msg %>
-            <% end %>
+            <% unless msg_type == "notice" %>
+              <div class="alert alert-<%= msg_type %> alert-dismissible fade in" id="flash" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <%= msg %>
+              <% end %>
             <% end %>
           </div>
         </div>
@@ -23,8 +23,8 @@
           <div class="col-md-4 col-sm-4 col-md-offset-4">
             <span class="shortened-url">
               <% if flash[:notice] %>
-              <strong> <%= link_to flash[:notice], flash[:notice], target: "_blank", style:"background-color:black;" %> </strong>
-                <a href="" class="clip_button" data-clipboard-text=<%= flash[:notice] %>>
+                <strong id="generated-link"> <%= link_to flash[:notice], flash[:notice], target: "_blank", style:"background-color:black;" %> </strong>
+                <a href="" class="clip_button" onclick="copy()" data-clipboard-text=<%= flash[:notice] %>>
                   <i class="fa fa-clipboard fa-2x" aria-hidden="true"></i>
                 </a>
               <% end %>
@@ -35,3 +35,23 @@
     </div>
   </div>
 </header>
+<script type="text/javascript">
+  function copy() {
+    var target = document.getElementById("generated-link");
+    var range, select;
+    if (document.createRange) {
+      range = document.createRange();
+      range.selectNode(target)
+      select = window.getSelection();
+      select.removeAllRanges();
+      select.addRange(range);
+      document.execCommand('copy');
+      select.removeAllRanges();
+    } else {
+      range = document.body.createTextRange();
+      range.moveToElementText(target);
+      range.select();
+      document.execCommand('copy');
+    }
+  }
+</script>
