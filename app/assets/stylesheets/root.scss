@@ -21,7 +21,6 @@ a {
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
-  font-size:calc(50% + 1vw);
 }
 
 a:hover,
@@ -158,7 +157,7 @@ a:focus {
 
 .current_user {
   font-family: 'Lato';
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .shorten-container {
@@ -173,7 +172,6 @@ a:focus {
 
 .btn-shorten {
   font-size: 18px;
-  font-size:calc(100% + 1vw);
 }
 
 .btn-manage {
@@ -187,7 +185,6 @@ a:focus {
 .shortened-url {
   text-decoration: none;
   font-size: 14px;
-  font-size:calc(100% + 1vw);
   margin-bottom: 50px;
   color: #fd9b6c;
   a {
