@@ -1,10 +1,10 @@
 <%= render partial: 'partials/intro', link: @link %>
-	<div class="row container scrollable">
-		<div class="col-md-8 col-md-offset-2">
-			<% if @links.empty? %>
-			<%= render partial: "links/partials/no_links" %>
-		<% else %>
-			<%= render partial: "links/partials/user_links", collection: @links, as: :link %>
-			<% end %>
-		</div>
-	</div>
+<div class="row container scrollable">
+  <div class="col-md-8 col-md-offset-4">
+    <% if @links.empty? %>
+      <%= render partial: "links/partials/no_links" %>
+    <% else %>
+      <%= render partial: "links/partials/user_links", collection: @links, as: :link %>
+    <% end %>
+  </div>
+</div>
