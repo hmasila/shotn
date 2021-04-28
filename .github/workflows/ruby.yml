@@ -48,7 +48,6 @@ jobs:
         ruby-version: '2.7.2'
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Create database
-        run: |
-          bundle exec rails db:test:prepare
+      run: bundle exec rails db:test:prepare
     - name: Run tests
       run: bundle exec rspec spec
