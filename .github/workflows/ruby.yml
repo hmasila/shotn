@@ -9,8 +9,8 @@ env:
   RUBY_VERSION: 2.7.2
   NODE_VERSION: 15.13.0
   RAILS_ENV: test
-  POSTGRES_USER: boatflex_e2e
-  POSTGRES_DB: boatflex_e2e_ci
+  POSTGRES_USER: postgres
+  POSTGRES_DB: shotn_test
   POSTGRES_PASSWORD: ""
 
 name: Ruby
