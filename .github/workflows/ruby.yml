@@ -28,7 +28,7 @@ jobs:
 
     services:
       postgres:
-        image: mdillon/postgis:10
+        image: postgres
         ports:
         - 5432:5432
         env:
