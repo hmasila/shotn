@@ -4,7 +4,7 @@ RSpec.describe 'users/new.html.erb', type: :feature do
   before(:all) do
     @name = Faker::Name.name
     @email = Faker::Internet.email
-    @password = Faker::Internet.password(8)
+    @password = Faker::Internet.password(min_length: 8)
   end
 
   scenario 'when user tries to sign up with valid data' do

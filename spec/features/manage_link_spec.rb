@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Manage Link', type: :feature do
   let(:user) { create(:user) }
 
-  let(:update_vanity) { Faker::Internet.password(2, 6) }
+  let(:update_vanity) { Faker::Internet.password(min_length: 2, max_length: 6) }
 
   before do
     sign_in_with(user.email, user.password)

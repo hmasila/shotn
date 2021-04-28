@@ -16,13 +16,13 @@ class Link < ApplicationRecord
                        end)
   scope :links, ->(user) { where(user_id: user.id).order('created_at desc') }
 
-  validates :full_url, presence: true, url: true
+  validates :full_url, presence: true, format: URI::regexp(%w[http https])
   validates :vanity_string, presence: true, uniqueness: true,
                             length: { maximum: 6 }
   after_create :link_title
 
   def link_title
-    self.title = Pismo::Document.new(full_url).title
+    self.title = Pismo[full_url].title
     save
   end
 

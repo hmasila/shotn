@@ -40,7 +40,7 @@ module Helpers
   def create_link
     visit home_path
     @full_url = 'https://google.com/'
-    @vanity = Faker::Internet.password(2, 6)
+    @vanity = Faker::Internet.password(min_length: 2, max_length: 6)
     fill_in 'link_full_url', with: @full_url
     fill_in 'link_vanity_string', with: @vanity
     click_button 'Shorten'
